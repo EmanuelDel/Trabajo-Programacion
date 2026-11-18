@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { cargarDatosDePrueba } from './datos-prueba.js'
+import { cargarDatosDePrueba } from './datos-prueba'
 
 cargarDatosDePrueba()
   .then(() => {

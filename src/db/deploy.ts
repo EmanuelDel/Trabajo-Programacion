@@ -2,8 +2,8 @@ import 'dotenv/config'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { migrate } from 'drizzle-orm/libsql/migrator'
-import { db } from './index.js'
-import { baseVacia, cargarDatosDePrueba } from './datos-prueba.js'
+import { db } from './index'
+import { baseVacia, cargarDatosDePrueba } from './datos-prueba'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
