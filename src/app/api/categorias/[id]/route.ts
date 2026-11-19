@@ -18,6 +18,13 @@ export async function PUT(
   }
 }
 
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  return PUT(req, { params })
+}
+
 export async function DELETE(
   _req: NextRequest,
   { params }: { params: { id: string } }

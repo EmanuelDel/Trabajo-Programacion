@@ -39,3 +39,10 @@ export async function PUT(
     return handleApiError(err)
   }
 }
+
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  return PUT(req, { params })
+}

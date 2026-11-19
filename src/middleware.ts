@@ -46,11 +46,6 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(loginUrl)
   }
 
-  // Si va a / y está logueado, redirigir a /ventas
-  if (pathname === '/' && sesion) {
-    return NextResponse.redirect(new URL('/ventas', req.url))
-  }
-
   // Restricción para usuarios: solo admin puede acceder a /usuarios
   if (pathname.startsWith('/usuarios') && sesion && sesion.rol !== 'admin') {
     return NextResponse.redirect(new URL('/ventas', req.url))
