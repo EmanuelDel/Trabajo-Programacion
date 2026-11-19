@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sistema de Gestión Comercial y Ventas
 
-## Getting Started
+Sistema web para gestión comercial, mostrador de ventas, stock, cuentas corrientes y control de accesos.
 
-First, run the development server:
+## Tecnologías Principales
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Frontend:** Next.js 14 (App Router), React 18, Tailwind CSS, Lucide Icons, Chart.js.
+- **Backend & API:** Next.js Route Handlers (`src/app/api/`) organizados por servicios de dominio (`src/services/`).
+- **Base de Datos & ORM:** SQLite / Turso con **Drizzle ORM**.
+- **Autenticación & Seguridad:** JWT (`jose`), contraseñas con hash (`scrypt` nativo) y cookies `HttpOnly`.
+
+---
+
+## Estructura del Backend y Proyecto
+
+```text
+src/
+├── app/                  # Rutas de interfaz y Endpoints API (Next.js App Router)
+│   ├── api/              # Controladores REST: auth, categorias, clientes, pagos, productos, usuarios, ventas
+│   ├── clientes/         # Pantalla de gestión de clientes y cuentas corrientes
+│   ├── login/            # Autenticación y acceso
+│   ├── productos/        # Catálogo, inventario y movimientos
+│   ├── usuarios/         # Administración de usuarios del sistema
+│   └── ventas/           # Mostrador de ventas y emisión de comprobantes
+├── components/           # Componentes UI reutilizables (Sidebar, Header, Layout)
+├── context/              # Contextos globales de React (AuthContext)
+├── db/                   # Esquemas Drizzle, cliente de conexión y scripts de migración/seed
+│   ├── schema.ts         # Definición de tablas y relaciones Drizzle
+│   ├── deploy.ts         # Script de despliegue automático de migraciones
+│   └── datos-prueba.ts   # Datos de prueba para inicializar el sistema
+├── lib/                  # Utilidades compartidas (auth, formateo en centavos, sesiones, respuestas API)
+└── services/             # Lógica de negocio pura desacoplada del framework web
+    ├── categorias.service.ts
+    ├── clientes.service.ts
+    ├── facturas.service.ts
+    ├── pagos.service.ts
+    ├── productos.service.ts
+    ├── stock.service.ts
+    ├── tablero.service.ts
+    └── usuarios.service.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Cómo Ejecutar el Proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Variables de Entorno
+Asegurarse de tener configurado el archivo `.env` (puede copiarse de `.env.example`):
+```env
+DATABASE_URL="file:local.db"
+SESSION_SECRET="clave-secreta-de-al-menos-32-caracteres"
+```
 
-## Learn More
+### 2. Instalar dependencias
+```bash
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Migraciones y Base de Datos
+```bash
+npm run db:deploy
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Iniciar en Desarrollo
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Abrir [http://localhost:3000](http://localhost:3000) en el navegador.
 
-## Deploy on Vercel
+### Credenciales de Prueba:
+- **Administrador:** `admin@comercio.com` / `admin123`
+- **Vendedor:** `vendedor@comercio.com` / `vendedor123`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
