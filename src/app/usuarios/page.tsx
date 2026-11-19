@@ -28,6 +28,11 @@ export default function UsuariosPage() {
   const [guardando, setGuardando] = useState(false)
   const [errorModal, setErrorModal] = useState('')
 
+  // Restablecer contraseña
+  const [modalReset, setModalReset] = useState<UsuarioItem | null>(null)
+  const [passwordGenerada, setPasswordGenerada] = useState<string | null>(null)
+  const [reseteando, setReseteando] = useState(false)
+
   const cargarUsuarios = async () => {
     setCargando(true)
     try {
@@ -48,12 +53,8 @@ export default function UsuariosPage() {
   const handleCrearUsuario = async (e: React.FormEvent) => {
     e.preventDefault()
     setErrorModal('')
-    if (password.length < 6) {
-      setErrorModal('La contraseña debe tener al menos 6 caracteres')
-      return
-    }
-
     setGuardando(true)
+
     try {
       const res = await fetch('/api/usuarios', {
         method: 'POST',
@@ -61,31 +62,28 @@ export default function UsuariosPage() {
         body: JSON.stringify({ nombre, email, password, rol })
       })
 
-      if (res.ok) {
-        setModalNuevo(false)
-        setNombre('')
-        setEmail('')
-        setPassword('')
-        cargarUsuarios()
-      } else {
-        const err = await res.json()
-        setErrorModal(err.error || 'Error al crear el usuario')
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'No se pudo crear el usuario')
       }
+
+      setModalNuevo(false)
+      setNombre('')
+      setEmail('')
+      setPassword('')
+      setRol('vendedor')
+      cargarUsuarios()
+    } catch (err: any) {
+      setErrorModal(err.message)
     } finally {
       setGuardando(false)
     }
   }
 
   const toggleActivo = async (u: UsuarioItem) => {
-    if (u.id === usuarioActual?.id) {
-      alert('No podés desactivar tu propio usuario')
+    if (!confirm(`¿Seguro que deseas ${u.activo ? 'desactivar' : 'habilitar'} el usuario ${u.nombre}?`)) {
       return
     }
-
-    const confirmar = confirm(
-      `¿Seguro que deseás ${u.activo ? 'desactivar' : 'activar'} a ${u.nombre}?`
-    )
-    if (!confirmar) return
 
     try {
       const res = await fetch(`/api/usuarios/${u.id}`, {
@@ -97,43 +95,75 @@ export default function UsuariosPage() {
       if (res.ok) {
         cargarUsuarios()
       } else {
-        const err = await res.json()
-        alert(err.error || 'Error al modificar usuario')
+        const data = await res.json()
+        alert(data.error || 'Error al cambiar estado')
       }
-    } catch {
-      alert('Error de conexión')
+    } catch (err: any) {
+      alert(err.message)
+    }
+  }
+
+  const handleResetPassword = async (u: UsuarioItem) => {
+    setModalReset(u)
+    setPasswordGenerada(null)
+  }
+
+  const ejecutarReset = async () => {
+    if (!modalReset) return
+    setReseteando(true)
+    try {
+      const res = await fetch(`/api/usuarios/${modalReset.id}/reset-password`, {
+        method: 'POST'
+      })
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'No se pudo restablecer la contraseña')
+      }
+      const data = await res.json()
+      setPasswordGenerada(data.passwordTemporal)
+    } catch (err: any) {
+      alert(err.message)
+      setModalReset(null)
+    } finally {
+      setReseteando(false)
     }
   }
 
   return (
     <AppLayout>
-      {/* Encabezado */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <div className="text-[10px] uppercase tracking-widest font-bold text-[#73877a] mb-1">
-            Configuración / Accesos
-          </div>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#20372d] font-normal tracking-tight">
-            Usuarios del sistema
+          <h1 className="font-serif text-3xl font-extrabold text-[#20372d] tracking-tight">
+            Usuarios y accesos
           </h1>
-          <p className="text-[#758278] text-sm mt-1">
-            Administrá las personas que pueden ingresar y operar el mostrador.
+          <p className="text-[#657d6f] text-sm mt-1">
+            Administrá los perfiles del sistema, credenciales y roles de trabajo.
           </p>
         </div>
 
         <button
-          type="button"
           onClick={() => setModalNuevo(true)}
-          className="px-4 py-2.5 rounded-lg bg-[#254d3c] hover:bg-[#34634d] text-white text-sm font-bold shadow transition-colors cursor-pointer"
+          className="bg-[#244f3d] hover:bg-[#326750] text-[#e8f1e9] font-bold px-4 py-2.5 rounded-xl shadow-sm flex items-center gap-2 text-sm transition-all cursor-pointer"
         >
-          + Nuevo usuario
+          <span>+</span>
+          <span>Nuevo usuario</span>
         </button>
       </div>
 
-      {/* Listado estilo Cards */}
-      <div className="space-y-3">
+      <div className="grid grid-cols-1 gap-4">
+        {cargando && (
+          <div className="p-8 text-center text-[#74877b] text-sm bg-white rounded-xl border border-[#edf0eb]">
+            Cargando lista de usuarios...
+          </div>
+        )}
+
+        {!cargando && usuarios.length === 0 && (
+          <div className="p-8 text-center text-[#74877b] text-sm bg-white rounded-xl border border-[#edf0eb]">
+            No hay usuarios registrados.
+          </div>
+        )}
+
         {usuarios.map((u) => {
-          const esAdmin = u.rol === 'admin'
           const iniciales = u.nombre
             .split(' ')
             .map((n) => n[0])
@@ -141,12 +171,14 @@ export default function UsuariosPage() {
             .join('')
             .toUpperCase()
 
+          const esAdmin = u.rol === 'admin'
+
           return (
             <div
               key={u.id}
-              className={`bg-white border border-[#e2e8df] border-l-4 ${
+              className={`bg-white border border-[#e5ebe3] border-l-4 ${
                 !u.activo
-                  ? 'border-l-[#9aa69d] opacity-75'
+                  ? 'border-l-[#d2dad4] opacity-75'
                   : esAdmin
                   ? 'border-l-[#8a6bc0]'
                   : 'border-l-[#4198a1]'
@@ -197,7 +229,15 @@ export default function UsuariosPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 flex-wrap">
+                <button
+                  type="button"
+                  onClick={() => handleResetPassword(u)}
+                  className="px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors cursor-pointer"
+                >
+                  Restablecer clave
+                </button>
+
                 {u.id !== usuarioActual?.id && (
                   <button
                     type="button"
@@ -216,6 +256,64 @@ export default function UsuariosPage() {
           )
         })}
       </div>
+
+      {/* MODAL: RESTABLECER CONTRASEÑA */}
+      {modalReset && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+          <div className="bg-white max-w-sm w-full rounded-2xl p-6 shadow-2xl border border-[#dfe4dc]">
+            <h3 className="font-serif text-xl font-bold text-[#20372d] mb-1">
+              Restablecer contraseña
+            </h3>
+            <p className="text-xs text-[#657d6f] mb-4">
+              Usuario: <span className="font-bold">{modalReset.nombre}</span> ({modalReset.email})
+            </p>
+
+            {!passwordGenerada ? (
+              <div>
+                <p className="text-xs text-slate-600 mb-4">
+                  Se generará una contraseña temporal aleatoria para este usuario que se mostrará en pantalla una sola vez.
+                </p>
+                <div className="flex justify-end gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setModalReset(null)}
+                    className="px-4 py-2 border border-slate-200 text-slate-600 text-xs font-bold rounded-lg cursor-pointer hover:bg-slate-50"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="button"
+                    disabled={reseteando}
+                    onClick={ejecutarReset}
+                    className="px-4 py-2 bg-[#254d3c] text-white text-xs font-bold rounded-lg cursor-pointer hover:bg-[#34634d] disabled:opacity-50"
+                  >
+                    {reseteando ? 'Generando...' : 'Generar clave'}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl mb-4 text-center">
+                  <p className="text-xs text-emerald-800 font-semibold mb-1">Nueva clave temporal:</p>
+                  <p className="text-lg font-mono font-black text-emerald-900 tracking-wider select-all">
+                    {passwordGenerada}
+                  </p>
+                </div>
+                <p className="text-[11px] text-slate-500 mb-4 text-center">
+                  Copiá esta clave y hacésela llegar al usuario para que inicie sesión y luego la modifique.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setModalReset(null)}
+                  className="w-full py-2 bg-[#1d3930] text-white text-xs font-bold rounded-lg cursor-pointer hover:bg-[#284f43]"
+                >
+                  Entendido, cerrar
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* MODAL: NUEVO USUARIO */}
       {modalNuevo && (
