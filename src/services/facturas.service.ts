@@ -337,6 +337,20 @@ export async function listarFacturas(filtros: {
   })
 }
 
+export async function obtenerProximoNumeroFactura() {
+  const [maxNum] = await db
+    .select({ maximo: max(facturas.numero) })
+    .from(facturas)
+
+  const siguienteNumero = (maxNum?.maximo ?? 0) + 1
+  const numeroFormateado = `0001-${String(siguienteNumero).padStart(8, '0')}`
+
+  return {
+    siguienteNumero,
+    numeroFormateado
+  }
+}
+
 export async function obtenerFacturaPorId(id: number) {
   const factura = await db.query.facturas.findFirst({
     where: eq(facturas.id, id),

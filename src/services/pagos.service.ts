@@ -23,6 +23,20 @@ export async function registrarPago(params: RegistrarPagoParams): Promise<{
   // Verificar que el cliente existe
   await obtenerClientePorId(params.clienteId)
 
+  // Validar que el pago no exceda el saldo actual adeudado
+  const saldoActual = await calcularSaldoCliente(params.clienteId)
+  if (params.importeCentavos > saldoActual) {
+    throw new ApiError(
+      400,
+      'PAGO_EXCEDE_SALDO',
+      `El importe del pago ($${(params.importeCentavos / 100).toFixed(2)}) supera el saldo adeudado ($${(saldoActual / 100).toFixed(2)})`,
+      {
+        saldoCentavos: saldoActual,
+        importeSolicitado: params.importeCentavos
+      }
+    )
+  }
+
   return await db.transaction(async (tx) => {
     // Obtener siguiente número de recibo de forma atómica
     const [maxRecibo] = await tx
