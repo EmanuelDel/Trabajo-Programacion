@@ -222,17 +222,17 @@ export default function TableroPage() {
     <AppLayout>
       <div className="space-y-8 max-w-6xl mx-auto">
         {/* Banner Hero Comercial */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#1f2429] via-[#28313b] to-[#313c49] p-8 text-white shadow-lg border border-slate-700/60">
+        <div className="tablero-hero-banner">
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="max-w-xl space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-[#f29a59]">
+              <div className="tablero-hero-badge">
                 <Sparkles className="w-3.5 h-3.5 text-[#f29a59]" />
                 <span>Panel Estratégico de Ventas</span>
               </div>
-              <h1 className="font-serif text-3xl sm:text-4xl font-extrabold tracking-tight">
+              <h1 className="tablero-hero-title">
                 Control Global del Mostrador
               </h1>
-              <p className="text-sm text-slate-300 leading-relaxed">
+              <p className="tablero-hero-desc">
                 Supervisión de operaciones, existencias críticas y cobranzas en cuentas corrientes.
               </p>
             </div>
@@ -240,7 +240,7 @@ export default function TableroPage() {
             <div className="flex items-center gap-3 shrink-0">
               <Link
                 href="/ventas"
-                className="group flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#d97736] to-[#c86928] hover:from-[#c86928] hover:to-[#b75d21] text-white font-bold text-xs uppercase tracking-wider shadow-md transition-all cursor-pointer"
+                className="group btn-primary-gradient px-5 py-3 text-xs uppercase tracking-wider gap-2"
               >
                 <ShoppingBag className="w-4 h-4" />
                 <span>Abrir Mostrador</span>
@@ -250,7 +250,7 @@ export default function TableroPage() {
           </div>
 
           {/* Adorno estético tenue */}
-          <div className="absolute -right-16 -bottom-24 w-80 h-80 rounded-full bg-[#d97736]/10 blur-3xl pointer-events-none"></div>
+          <div className="tablero-hero-glow"></div>
         </div>
 
         {/* Tarjetas KPI de Alto Impacto */}

@@ -1,0 +1,112 @@
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS DEL TABLERO / DASHBOARD
+   ========================================================================== */
+
+/* Hero Banner Comercial */
+.tablero-hero-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--gradient-gray-hero);
+  padding: 2rem;
+  color: #ffffff;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tablero-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #f29a59;
+}
+
+.tablero-hero-title {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.tablero-hero-desc {
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.tablero-hero-glow {
+  position: absolute;
+  right: -4rem;
+  bottom: -6rem;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 9999px;
+  background-color: rgba(217, 119, 54, 0.1);
+  filter: blur(48px);
+  pointer-events: none;
+}
+
+/* Tarjetas KPI de Impacto */
+.kpi-card {
+  background-color: #ffffff;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--transition-fast);
+}
+
+.kpi-card:hover {
+  border-color: var(--gray-300);
+}
+
+.kpi-icon-box {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kpi-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: var(--gray-900);
+}
+
+/* Ranking de Productos Más Vendidos */
+.ranking-row {
+  padding: 0.875rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: 0.75rem;
+  transition: background-color var(--transition-fast);
+}
+
+.ranking-row:hover {
+  background-color: var(--surface-muted);
+}
+
+.ranking-position-badge {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.75rem;
+  font-weight: 900;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}

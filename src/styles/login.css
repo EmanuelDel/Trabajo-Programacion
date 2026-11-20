@@ -1,0 +1,77 @@
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS DE LA PANTALLA DE LOGIN
+   ========================================================================== */
+
+.login-page-container {
+  min-height: 100vh;
+  background: var(--gradient-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.login-card {
+  max-width: 28rem;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 640px) {
+  .login-card {
+    padding: 2.5rem;
+  }
+}
+
+.login-logo-box {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  background: var(--gradient-orange);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 1rem;
+}
+
+.login-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  letter-spacing: -0.025em;
+}
+
+.login-quick-btn {
+  padding: 0.375rem 0.875rem;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.login-quick-btn-admin {
+  background-color: var(--orange-light);
+  color: var(--orange-primary);
+  border: 1px solid var(--orange-border);
+}
+
+.login-quick-btn-admin:hover {
+  background-color: #fee7d6;
+}
+
+.login-quick-btn-seller {
+  background-color: var(--gray-100);
+  color: var(--gray-700);
+  border: 1px solid var(--border-subtle);
+}
+
+.login-quick-btn-seller:hover {
+  background-color: var(--gray-200);
+}

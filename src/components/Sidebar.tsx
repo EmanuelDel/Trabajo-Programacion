@@ -55,9 +55,9 @@ export function Sidebar({ abierto = false, setAbierto }: SidebarProps) {
       `}>
         <div>
           {/* Brand / Logo */}
-          <div className="px-6 py-5 border-b border-white/[0.08] flex items-center justify-between">
+          <div className="sidebar-brand-box">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#e07d38] to-[#c76522] text-white flex items-center justify-center shadow-md">
+              <div className="sidebar-logo-icon">
                 <Store className="w-4 h-4 text-white" strokeWidth={2.2} />
               </div>
               <div className="min-w-0">
@@ -65,7 +65,7 @@ export function Sidebar({ abierto = false, setAbierto }: SidebarProps) {
                   <span className="font-semibold text-sm tracking-tight text-white font-sans">
                     Mostrador
                   </span>
-                  <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-white/[0.08] text-[#f29a59] border border-white/[0.08]">
+                  <span className="sidebar-tag-pill">
                     COMERCIAL
                   </span>
                 </div>

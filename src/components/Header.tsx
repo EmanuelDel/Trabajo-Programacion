@@ -62,7 +62,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
 
   return (
     <>
-      <header className="h-16 border-b border-[#e2e5e8] bg-white/85 backdrop-blur-md flex items-center justify-between px-4 sm:px-8 text-sm sticky top-0 z-20 shadow-xs">
+      <header className="header-root">
         {/* Left: Mobile Menu Trigger + Status Badge */}
         <div className="flex items-center gap-3">
           {onToggleSidebar && (
@@ -76,7 +76,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
             </button>
           )}
 
-          <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-[11px] font-semibold text-slate-700">
+          <div className="header-status-badge">
             <span className="w-2 h-2 rounded-full bg-[#d97736] animate-pulse"></span>
             <span className="hidden sm:inline">Terminal operativa y sincronizada</span>
             <span className="sm:hidden">Online</span>
@@ -88,7 +88,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
           {usuario ? (
             <div className="flex items-center gap-2 sm:gap-4">
               <div className="flex items-center gap-2 sm:gap-3 pr-2 sm:pr-3 border-r border-slate-200">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 text-slate-800 border border-slate-300 flex items-center justify-center text-xs font-black shadow-xs shrink-0">
+                <div className="header-user-avatar">
                   {iniciales}
                 </div>
                 <div className="text-left hidden sm:block">

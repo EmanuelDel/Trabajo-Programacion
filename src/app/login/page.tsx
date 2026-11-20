@@ -48,18 +48,18 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1f2429] via-[#242b32] to-[#2c343d] flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-3xl p-8 sm:p-10 shadow-2xl border border-slate-700/20">
+    <div className="login-page-container">
+      <div className="login-card">
         {/* Brand */}
         <div className="flex flex-col items-center mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#e07d38] to-[#c76522] text-white flex items-center justify-center shadow-lg mb-4">
+          <div className="login-logo-box">
             <Store className="w-7 h-7 text-white" strokeWidth={2.2} />
           </div>
           <div className="flex items-center gap-2">
-            <h1 className="font-sans text-2xl font-bold text-[#1e2429] tracking-tight">
+            <h1 className="login-title">
               Mostrador
             </h1>
-            <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-orange-50 text-[#d97736] border border-orange-200">
+            <span className="badge badge-accent">
               PRO
             </span>
           </div>
@@ -76,7 +76,7 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+            <label className="form-label">
               Correo o usuario
             </label>
             <input
@@ -85,12 +85,12 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@comercio.com"
               required
-              className="w-full h-11 px-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#d97736] focus:bg-white transition-all"
+              className="form-input"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+            <label className="form-label">
               Contraseña
             </label>
             <input
@@ -99,14 +99,14 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
-              className="w-full h-11 px-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#d97736] focus:bg-white transition-all"
+              className="form-input"
             />
           </div>
 
           <button
             type="submit"
             disabled={cargando}
-            className="w-full h-12 bg-gradient-to-r from-[#d97736] to-[#c86928] hover:from-[#c86928] hover:to-[#b75d21] text-white font-bold rounded-xl transition-all cursor-pointer disabled:opacity-50 mt-2 shadow-md flex items-center justify-center text-sm"
+            className="btn btn-primary-gradient btn-full btn-lg mt-2"
           >
             {cargando ? 'Ingresando...' : 'Iniciar sesión →'}
           </button>
@@ -121,14 +121,14 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={() => loginRapido('admin@comercio.com', 'admin123')}
-              className="px-3.5 py-1.5 rounded-xl bg-[#fef4ec] text-[#c86928] text-xs font-semibold hover:bg-[#fee7d6] transition-colors border border-[#fed7aa]"
+              className="login-quick-btn login-quick-btn-admin"
             >
               👑 Administradora
             </button>
             <button
               type="button"
               onClick={() => loginRapido('vendedor@comercio.com', 'vendedor123')}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 transition-colors border border-slate-200"
+              className="login-quick-btn login-quick-btn-seller"
             >
               💼 Vendedora
             </button>

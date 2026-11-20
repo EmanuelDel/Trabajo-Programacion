@@ -328,21 +328,13 @@ export default function VentasPage() {
         <div className="flex gap-2">
           <button
             onClick={() => setVista('nueva')}
-            className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-colors cursor-pointer ${
-              vista === 'nueva'
-                ? 'bg-[#d97736] text-white shadow'
-                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
-            }`}
+            className={`view-toggle-btn ${vista === 'nueva' ? 'active' : 'inactive'}`}
           >
             + Nueva venta
           </button>
           <button
             onClick={() => setVista('historial')}
-            className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-colors cursor-pointer ${
-              vista === 'historial'
-                ? 'bg-[#d97736] text-white shadow'
-                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
-            }`}
+            className={`view-toggle-btn ${vista === 'historial' ? 'active' : 'inactive'}`}
           >
             Ver ventas registradas ({ventasHistorial.length})
           </button>
@@ -486,21 +478,21 @@ export default function VentasPage() {
                             </div>
                           </td>
                           <td className="py-3 px-3 text-center">
-                            <div className="inline-flex items-center border border-slate-200 rounded-lg overflow-hidden bg-white">
+                            <div className="qty-stepper">
                               <button
                                 type="button"
                                 onClick={() => modificarCantidad(item.productoId, -1)}
-                                className="w-8 h-8 flex items-center justify-center text-slate-900 hover:bg-[#edf0eb] font-bold"
+                                className="qty-stepper-btn"
                               >
                                 −
                               </button>
-                              <span className="w-10 text-center font-bold text-sm">
+                              <span className="qty-stepper-display">
                                 {item.cantidad}
                               </span>
                               <button
                                 type="button"
                                 onClick={() => modificarCantidad(item.productoId, 1)}
-                                className="w-8 h-8 flex items-center justify-center text-slate-900 hover:bg-[#edf0eb] font-bold"
+                                className="qty-stepper-btn"
                               >
                                 +
                               </button>

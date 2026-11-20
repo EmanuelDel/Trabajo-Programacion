@@ -1,0 +1,132 @@
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS DEL MÓDULO DE VENTAS (PUNTO DE VENTA / CAJA)
+   ========================================================================== */
+
+/* Conmutador de Vistas (Nueva Venta vs Historial) */
+.view-toggle-btn {
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.view-toggle-btn.active {
+  background-color: var(--orange-primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid transparent;
+}
+
+.view-toggle-btn.inactive {
+  background-color: #ffffff;
+  color: var(--gray-700);
+  border: 1px solid var(--border-subtle);
+}
+
+.view-toggle-btn.inactive:hover {
+  background-color: var(--surface-muted);
+}
+
+/* Stepper de Cantidad de Producto */
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.qty-stepper-btn {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-900);
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.qty-stepper-btn:hover {
+  background-color: var(--gray-100);
+}
+
+.qty-stepper-display {
+  width: 2.5rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+/* Tarjeta de Resumen Lateral (Cobro) */
+.resumen-cobro-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-xs);
+  position: sticky;
+  top: 6rem;
+}
+
+.total-cobro-display {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.5rem;
+  color: var(--orange-primary);
+  font-weight: 700;
+}
+
+/* Opciones de Medios de Pago */
+.payment-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.payment-radio-label:hover {
+  background-color: var(--surface-muted);
+}
+
+.payment-cash-box {
+  padding: 0.75rem;
+  background-color: var(--surface-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Tarjeta de Comprobante en Historial */
+.venta-history-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--orange-primary);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow var(--transition-fast);
+}
+
+@media (min-width: 640px) {
+  .venta-history-card {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.venta-history-card:hover {
+  box-shadow: var(--shadow-md);
+}

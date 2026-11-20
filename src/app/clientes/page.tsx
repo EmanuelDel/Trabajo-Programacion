@@ -266,10 +266,10 @@ export default function ClientesPage() {
               return (
                 <div
                   key={cli.id}
-                  className="bg-white border border-slate-200 border-l-4 border-l-[#d97736] rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:shadow transition-shadow"
+                  className="cliente-card"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-[#ffe7dc] text-[#b45332] grid place-items-center font-bold text-sm">
+                    <div className="cliente-avatar-box">
                       {iniciales}
                     </div>
                     <div>

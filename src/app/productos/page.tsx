@@ -310,10 +310,9 @@ export default function ProductosPage() {
                       </span>
                     </div>
 
-                    <div className="w-24 h-1.5 rounded-full bg-[#edf0e8] overflow-hidden">
+                    <div className="stock-bar-track">
                       <div
-                        className={`h-full rounded-full ${bajoStock ? 'bg-[#e4aa38]' : 'bg-[#55a879]'}`}
-                        style={{ width: `${porcentaje}%` }}
+                        className={`stock-bar-fill ${bajoStock ? 'low' : 'normal'} w-pct-${Math.min(100, Math.max(0, Math.round(porcentaje / 10) * 10))}`}
                       ></div>
                     </div>
                   </div>
