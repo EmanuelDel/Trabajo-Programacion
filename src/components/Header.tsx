@@ -2,9 +2,13 @@
 
 import { useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
-import { KeyRound, LogOut, CheckCircle2, ShieldAlert, Sparkles } from 'lucide-react'
+import { KeyRound, LogOut, CheckCircle2, ShieldAlert, Menu } from 'lucide-react'
 
-export function Header() {
+interface HeaderProps {
+  onToggleSidebar?: () => void
+}
+
+export function Header({ onToggleSidebar }: HeaderProps) {
   const { usuario, cerrarSesion } = useAuth()
   const [modalPasswordAbierto, setModalPasswordAbierto] = useState(false)
   const [passwordActual, setPasswordActual] = useState('')
@@ -58,26 +62,38 @@ export function Header() {
 
   return (
     <>
-      <header className="h-16 border-b border-[#e2eae4] bg-white/80 backdrop-blur-md flex items-center justify-between px-8 text-sm sticky top-0 z-20 shadow-xs">
-        {/* Status Badge */}
+      <header className="h-16 border-b border-[#e2eae4] bg-white/80 backdrop-blur-md flex items-center justify-between px-4 sm:px-8 text-sm sticky top-0 z-20 shadow-xs">
+        {/* Left: Mobile Menu Trigger + Status Badge */}
         <div className="flex items-center gap-3">
+          {onToggleSidebar && (
+            <button
+              type="button"
+              onClick={onToggleSidebar}
+              className="md:hidden p-2 -ml-2 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+              title="Abrir menú"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          )}
+
           <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-[11px] font-semibold text-emerald-800">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Terminal operativa y sincronizada</span>
+            <span className="hidden sm:inline">Terminal operativa y sincronizada</span>
+            <span className="sm:hidden">Online</span>
           </div>
         </div>
 
         {/* User controls */}
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-2 sm:gap-4">
           {usuario ? (
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3 pr-3 border-r border-slate-200">
-                <div className="w-8 h-8 rounded-lg bg-[#eaf4ee] text-[#143224] border border-[#c4dcce] flex items-center justify-center text-xs font-black shadow-xs">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <div className="flex items-center gap-2 sm:gap-3 pr-2 sm:pr-3 border-r border-slate-200">
+                <div className="w-8 h-8 rounded-lg bg-[#eaf4ee] text-[#143224] border border-[#c4dcce] flex items-center justify-center text-xs font-black shadow-xs shrink-0">
                   {iniciales}
                 </div>
-                <div className="text-left">
+                <div className="text-left hidden sm:block">
                   <p className="text-xs font-bold text-slate-800 leading-tight flex items-center gap-1.5">
-                    {usuario.nombre}
+                    <span className="truncate max-w-[120px]">{usuario.nombre}</span>
                     <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded ${
                       usuario.rol === 'admin' 
                         ? 'bg-purple-100 text-purple-800' 
@@ -86,34 +102,34 @@ export function Header() {
                       {rolLabel}
                     </span>
                   </p>
-                  <p className="text-[11px] font-mono text-slate-500 leading-tight">
+                  <p className="text-[11px] font-mono text-slate-500 leading-tight truncate max-w-[140px]">
                     {usuario.email}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 sm:gap-2">
                 <button
                   onClick={() => setModalPasswordAbierto(true)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-all cursor-pointer"
-                  title="Cambiar contraseña personal"
+                  className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-all cursor-pointer"
+                  title="Cambiar contraseña"
                 >
-                  <KeyRound className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Seguridad</span>
+                  <KeyRound className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-slate-500" />
+                  <span className="hidden sm:inline">Seguridad</span>
                 </button>
 
                 <button
                   onClick={() => cerrarSesion()}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-700 hover:text-rose-900 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all cursor-pointer"
-                  title="Cerrar sesión del puesto"
+                  className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-lg text-xs font-semibold text-rose-700 hover:text-rose-900 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all cursor-pointer"
+                  title="Cerrar sesión"
                 >
-                  <LogOut className="w-3.5 h-3.5 text-rose-600" />
-                  <span>Salir</span>
+                  <LogOut className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-rose-600" />
+                  <span className="hidden sm:inline">Salir</span>
                 </button>
               </div>
             </div>
           ) : (
-            <span className="text-xs text-slate-400">Verificando sesión...</span>
+            <span className="text-xs text-slate-400">Verificando...</span>
           )}
         </div>
       </header>
