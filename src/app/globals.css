@@ -3,16 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #f8faf9;
-  --foreground: #14241d;
-  --primary: #183327;
-  --primary-hover: #224536;
-  --accent: #2e604a;
-  --accent-light: #eaf3ee;
+  --background: #f4f5f6;
+  --foreground: #1e2429;
+  --primary: #2b333a;
+  --primary-hover: #1e2429;
+  --accent: #d97736;
+  --accent-hover: #bf6327;
+  --accent-light: #fef4ec;
   --surface: #ffffff;
-  --surface-alt: #f1f5f2;
-  --border: #e3ebe6;
-  --border-focus: #183327;
+  --surface-alt: #f0f2f4;
+  --border: #e2e5e8;
+  --border-focus: #d97736;
 }
 
 body {
@@ -32,11 +33,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cdd9d2;
+  background: #cbd2d9;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #aabeb2;
+  background: #9aa5b1;
 }
 
 /* Transiciones suaves consistentes */

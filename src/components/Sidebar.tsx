@@ -43,29 +43,29 @@ export function Sidebar({ abierto = false, setAbierto }: SidebarProps) {
       {abierto && (
         <div 
           onClick={cerrar}
-          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 md:hidden transition-opacity duration-200"
+          className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-40 md:hidden transition-opacity duration-200"
           aria-hidden="true"
         />
       )}
 
-      {/* Sidebar fijo en desktop / Drawer deslizante en mobile */}
+      {/* Sidebar con degradado de gris a gris cálido pizarra */}
       <aside className={`
-        fixed md:sticky top-0 bottom-0 left-0 w-64 h-screen bg-[#0f241b] text-slate-100 flex flex-col justify-between shrink-0 overflow-y-auto z-50 md:z-30 border-r border-[#1a382b] select-none transition-transform duration-300 ease-in-out
+        fixed md:sticky top-0 bottom-0 left-0 w-64 h-screen bg-gradient-to-b from-[#1f2429] via-[#242b32] to-[#2c343d] text-slate-100 flex flex-col justify-between shrink-0 overflow-y-auto z-50 md:z-30 border-r border-slate-700/50 select-none transition-transform duration-300 ease-in-out
         ${abierto ? 'translate-x-0 shadow-2xl' : '-translate-x-full md:translate-x-0'}
       `}>
         <div>
-          {/* Brand / Logo + Botón cerrar en mobile */}
-          <div className="px-6 py-5 border-b border-white/[0.06] flex items-center justify-between">
+          {/* Brand / Logo */}
+          <div className="px-6 py-5 border-b border-white/[0.08] flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-white/[0.08] border border-white/10 text-emerald-400 flex items-center justify-center shadow-xs">
-                <Store className="w-4 h-4 text-emerald-400" strokeWidth={2} />
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#e07d38] to-[#c76522] text-white flex items-center justify-center shadow-md">
+                <Store className="w-4 h-4 text-white" strokeWidth={2.2} />
               </div>
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="font-semibold text-sm tracking-tight text-white font-sans">
                     Mostrador
                   </span>
-                  <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-white/[0.08] text-emerald-400/90 border border-white/[0.06]">
+                  <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-white/[0.08] text-[#f29a59] border border-white/[0.08]">
                     COMERCIAL
                   </span>
                 </div>
@@ -89,7 +89,7 @@ export function Sidebar({ abierto = false, setAbierto }: SidebarProps) {
           {/* Navigation Section */}
           <div className="p-4 space-y-6">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-[#638774] px-3 mb-2">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 mb-2">
                 Módulos Principales
               </p>
               <nav className="space-y-1">
@@ -106,14 +106,14 @@ export function Sidebar({ abierto = false, setAbierto }: SidebarProps) {
                       onClick={cerrar}
                       className={`group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                         activo
-                          ? 'bg-[#1b3f2f] text-white shadow-xs border border-[#2b5c46]'
-                          : 'text-[#96b8a6] hover:bg-[#142e22] hover:text-white'
+                          ? 'bg-gradient-to-r from-[#d97736] to-[#c86928] text-white shadow-md'
+                          : 'text-slate-300 hover:bg-white/[0.06] hover:text-white'
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <Icon 
                           className={`w-4 h-4 transition-transform group-hover:scale-110 ${
-                            activo ? 'text-[#c6e980]' : 'text-[#638774] group-hover:text-[#96b8a6]'
+                            activo ? 'text-white' : 'text-slate-400 group-hover:text-[#f29a59]'
                           }`} 
                           strokeWidth={2}
                         />
@@ -123,12 +123,12 @@ export function Sidebar({ abierto = false, setAbierto }: SidebarProps) {
                       <div className="flex items-center gap-1.5">
                         {link.badge && (
                           <span className={`text-[9px] font-bold uppercase px-1.5 py-0.2 rounded ${
-                            activo ? 'bg-[#c6e980]/20 text-[#c6e980]' : 'bg-[#1b3f2f] text-[#7da38f]'
+                            activo ? 'bg-white/20 text-white' : 'bg-white/[0.08] text-slate-400'
                           }`}>
                             {link.badge}
                           </span>
                         )}
-                        {activo && <ChevronRight className="w-3.5 h-3.5 text-[#c6e980]" />}
+                        {activo && <ChevronRight className="w-3.5 h-3.5 text-white/90" />}
                       </div>
                     </Link>
                   )
@@ -139,13 +139,13 @@ export function Sidebar({ abierto = false, setAbierto }: SidebarProps) {
         </div>
 
         {/* Footer Info */}
-        <div className="p-4 border-t border-[#1b3d2e] bg-[#0c1d16]/50">
-          <div className="flex items-center justify-between text-[11px] text-[#638774]">
+        <div className="p-4 border-t border-white/[0.08] bg-black/20">
+          <div className="flex items-center justify-between text-[11px] text-slate-400">
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-[#e07d38] animate-pulse"></span>
               Sucursal Central #01
             </span>
-            <span className="font-mono text-[10px] text-[#486354]">v2.4</span>
+            <span className="font-mono text-[10px] text-slate-500">v2.5</span>
           </div>
         </div>
       </aside>

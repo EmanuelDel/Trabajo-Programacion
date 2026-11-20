@@ -173,13 +173,13 @@ export default function ProductosPage() {
       {/* Encabezado */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7">
         <div>
-          <div className="text-[10px] uppercase tracking-widest font-bold text-[#73877a] mb-1">
+          <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-1">
             Catálogo / Existencias
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#20372d] font-normal tracking-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl text-slate-900 font-normal tracking-tight">
             Productos y stock
           </h1>
-          <p className="text-[#758278] text-sm mt-1">
+          <p className="text-slate-500 text-sm mt-1">
             Administrá tu catálogo y seguí las existencias en depósito.
           </p>
         </div>
@@ -190,14 +190,14 @@ export default function ProductosPage() {
               <button
                 type="button"
                 onClick={() => setModalProducto(true)}
-                className="px-4 py-2.5 rounded-lg bg-[#254d3c] hover:bg-[#34634d] text-white text-sm font-bold shadow transition-colors cursor-pointer"
+                className="px-4 py-2.5 rounded-lg bg-[#d97736] hover:bg-[#c86928] text-white text-sm font-bold shadow transition-colors cursor-pointer"
               >
                 + Nuevo producto
               </button>
               <button
                 type="button"
                 onClick={() => setModalMovimiento(true)}
-                className="px-4 py-2.5 rounded-lg bg-white border border-[#d4ded4] hover:bg-[#fafbf7] text-[#355445] text-sm font-bold transition-colors cursor-pointer"
+                className="px-4 py-2.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-sm font-bold transition-colors cursor-pointer"
               >
                 Registrar movimiento
               </button>
@@ -206,7 +206,7 @@ export default function ProductosPage() {
           <button
             type="button"
             onClick={() => setVista(vista === 'catalogo' ? 'movimientos' : 'catalogo')}
-            className="px-4 py-2.5 rounded-lg bg-white border border-[#d4ded4] hover:bg-[#fafbf7] text-[#355445] text-sm font-bold transition-colors cursor-pointer"
+            className="px-4 py-2.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-sm font-bold transition-colors cursor-pointer"
           >
             {vista === 'catalogo' ? 'Ver movimientos de stock →' : '← Volver a productos'}
           </button>
@@ -215,26 +215,26 @@ export default function ProductosPage() {
 
       {/* Estadísticas rápidas */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm">
-          <p className="text-xs text-[#7b8b7e] font-medium mb-1">Productos activos</p>
-          <strong className="font-serif text-3xl text-[#294535] font-normal">
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <p className="text-xs text-slate-500 font-medium mb-1">Productos activos</p>
+          <strong className="font-serif text-3xl text-slate-900 font-normal">
             {productosActivosCount}
           </strong>
-          <small className="block text-xs text-[#8b998e] mt-1">En el catálogo de venta</small>
+          <small className="block text-xs text-slate-400 mt-1">En el catálogo de venta</small>
         </div>
-        <div className="bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm">
-          <p className="text-xs text-[#7b8b7e] font-medium mb-1">Con stock bajo</p>
-          <strong className={`font-serif text-3xl font-normal ${stockBajoCount > 0 ? 'text-[#b85243]' : 'text-[#294535]'}`}>
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <p className="text-xs text-slate-500 font-medium mb-1">Con stock bajo</p>
+          <strong className={`font-serif text-3xl font-normal ${stockBajoCount > 0 ? 'text-[#b85243]' : 'text-slate-900'}`}>
             {stockBajoCount}
           </strong>
-          <small className="block text-xs text-[#8b998e] mt-1">Existencias $\le$ stock mínimo</small>
+          <small className="block text-xs text-slate-400 mt-1">Existencias $\le$ stock mínimo</small>
         </div>
-        <div className="bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm">
-          <p className="text-xs text-[#7b8b7e] font-medium mb-1">Movimientos registrados</p>
-          <strong className="font-serif text-3xl text-[#294535] font-normal">
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <p className="text-xs text-slate-500 font-medium mb-1">Movimientos registrados</p>
+          <strong className="font-serif text-3xl text-slate-900 font-normal">
             {movimientos.length}
           </strong>
-          <small className="block text-xs text-[#8b998e] mt-1">Entradas y salidas históricas</small>
+          <small className="block text-xs text-slate-400 mt-1">Entradas y salidas históricas</small>
         </div>
       </div>
 
@@ -247,7 +247,7 @@ export default function ProductosPage() {
               placeholder="Buscar por código o descripción..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
-              className="w-full sm:max-w-md h-11 px-4 bg-white border border-[#dbe3da] rounded-xl text-sm text-[#293b31] focus:outline-none focus:ring-2 focus:ring-[#d8a448] shadow-sm"
+              className="w-full sm:max-w-md h-11 px-4 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#d97736] shadow-sm"
             />
           </div>
 
@@ -260,7 +260,7 @@ export default function ProductosPage() {
               return (
                 <div
                   key={prod.id}
-                  className={`bg-white border border-[#e2e8df] border-l-4 ${
+                  className={`bg-white border border-slate-200 border-l-4 ${
                     !prod.activo
                       ? 'border-l-[#9aa69d] opacity-75'
                       : bajoStock
@@ -274,11 +274,11 @@ export default function ProductosPage() {
                     </div>
                     <div>
                       <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="font-bold text-[#2e4839] text-base">
+                        <h3 className="font-bold text-slate-900 text-base">
                           {prod.descripcion}
                         </h3>
                         {!prod.activo ? (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#edf0eb] text-[#89968b]">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#edf0eb] text-slate-400">
                             Inactivo
                           </span>
                         ) : bajoStock ? (
@@ -291,21 +291,21 @@ export default function ProductosPage() {
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-[#4e6657] mt-1">
+                      <p className="text-xs text-slate-600 mt-1">
                         Código: <b className="font-mono">{prod.codigo}</b>
                       </p>
-                      <div className="text-xs text-[#697b6d] mt-1">
-                        Precio de venta: <b className="font-mono text-sm text-[#20372d]">{formatearCentavos(prod.precioVentaCentavos)}</b>
+                      <div className="text-xs text-slate-500 mt-1">
+                        Precio de venta: <b className="font-mono text-sm text-slate-900">{formatearCentavos(prod.precioVentaCentavos)}</b>
                       </div>
                     </div>
                   </div>
 
                   <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2">
                     <div className="text-right">
-                      <strong className="font-serif text-2xl text-[#2c4938] block leading-none">
+                      <strong className="font-serif text-2xl text-slate-900 block leading-none">
                         {prod.existencia}
                       </strong>
-                      <span className="text-[10px] text-[#87958a] uppercase tracking-wider font-semibold">
+                      <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">
                         unidades
                       </span>
                     </div>
@@ -324,16 +324,16 @@ export default function ProductosPage() {
         </>
       ) : (
         /* Vista de Movimientos de Stock (Kardex) */
-        <div className="bg-white border border-[#e1e7df] rounded-xl overflow-hidden shadow-sm">
-          <div className="p-5 border-b border-[#edf0eb] bg-[#fafbf8]">
-            <h2 className="text-base font-bold text-[#20372d]">Movimientos de inventario</h2>
-            <p className="text-xs text-[#829087]">Historial inmutable de entradas y salidas.</p>
+        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+          <div className="p-5 border-b border-slate-100 bg-slate-50/70">
+            <h2 className="text-base font-bold text-slate-900">Movimientos de inventario</h2>
+            <p className="text-xs text-slate-400">Historial inmutable de entradas y salidas.</p>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-[#fafbf8] text-[10px] uppercase tracking-wider text-[#8a988d] border-b border-[#edf0eb]">
+                <tr className="bg-slate-50/70 text-[10px] uppercase tracking-wider text-slate-400 border-b border-slate-100">
                   <th className="py-3 px-4">Fecha</th>
                   <th className="py-3 px-4">Producto</th>
                   <th className="py-3 px-3 text-center">Tipo</th>
@@ -342,15 +342,15 @@ export default function ProductosPage() {
                   <th className="py-3 px-4">Motivo u Origen</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#edf0eb]">
+              <tbody className="divide-y divide-slate-100">
                 {movimientos.map((m) => {
                   const esIngreso = m.tipo === 'INGRESO'
                   return (
-                    <tr key={m.id} className="hover:bg-[#fafbf8]">
-                      <td className="py-3 px-4 font-mono text-[#89968d]">
+                    <tr key={m.id} className="hover:bg-slate-50/70">
+                      <td className="py-3 px-4 font-mono text-slate-400">
                         {formatearFecha(m.fecha)}
                       </td>
-                      <td className="py-3 px-4 font-semibold text-[#2c4436]">
+                      <td className="py-3 px-4 font-semibold text-slate-900">
                         {m.producto ? m.producto.descripcion : `Producto #${m.productoId}`}
                       </td>
                       <td className="py-3 px-3 text-center">
@@ -367,11 +367,11 @@ export default function ProductosPage() {
                           {esIngreso ? `+${m.cantidad}` : `-${m.cantidad}`}
                         </span>
                       </td>
-                      <td className="py-3 px-3 text-right font-mono font-semibold text-[#20372d]">
+                      <td className="py-3 px-3 text-right font-mono font-semibold text-slate-900">
                         {m.existenciaResultante} u.
                       </td>
-                      <td className="py-3 px-4 text-[#52675b]">
-                        {m.motivo} <span className="text-[10px] text-[#89968d]">({m.origen})</span>
+                      <td className="py-3 px-4 text-slate-600">
+                        {m.motivo} <span className="text-[10px] text-slate-400">({m.origen})</span>
                       </td>
                     </tr>
                   )
@@ -387,32 +387,32 @@ export default function ProductosPage() {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <form
             onSubmit={handleGuardarProducto}
-            className="bg-white max-w-lg w-full rounded-2xl p-6 shadow-2xl border border-[#dfe4dc] space-y-4"
+            className="bg-white max-w-lg w-full rounded-2xl p-6 shadow-2xl border border-slate-200 space-y-4"
           >
-            <div className="border-b border-[#edf0eb] pb-3">
-              <h3 className="font-serif text-2xl font-bold text-[#20372d]">Nuevo producto</h3>
-              <p className="text-xs text-[#829087]">Agregá un artículo al catálogo para venderlo.</p>
+            <div className="border-b border-slate-100 pb-3">
+              <h3 className="font-serif text-2xl font-bold text-slate-900">Nuevo producto</h3>
+              <p className="text-xs text-slate-400">Agregá un artículo al catálogo para venderlo.</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">Código *</label>
+                <label className="block text-xs font-bold text-slate-600 mb-1">Código *</label>
                 <input
                   type="text"
                   required
                   placeholder="Ej. CAF-002"
                   value={prodCodigo}
                   onChange={(e) => setProdCodigo(e.target.value.toUpperCase())}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm uppercase font-mono"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm uppercase font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">Categoría</label>
+                <label className="block text-xs font-bold text-slate-600 mb-1">Categoría</label>
                 <select
                   value={prodCategoriaId}
                   onChange={(e) => setProdCategoriaId(parseInt(e.target.value, 10))}
-                  className="w-full h-9 px-2 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-2 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 >
                   {categorias.map((c) => (
                     <option key={c.id} value={c.id}>
@@ -423,19 +423,19 @@ export default function ProductosPage() {
               </div>
 
               <div className="col-span-2">
-                <label className="block text-xs font-bold text-[#52675b] mb-1">Descripción *</label>
+                <label className="block text-xs font-bold text-slate-600 mb-1">Descripción *</label>
                 <input
                   type="text"
                   required
                   placeholder="Ej. Café en granos colombianos 500 g"
                   value={prodDescripcion}
                   onChange={(e) => setProdDescripcion(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">Precio de venta ($) *</label>
+                <label className="block text-xs font-bold text-slate-600 mb-1">Precio de venta ($) *</label>
                 <input
                   type="number"
                   step="0.01"
@@ -443,45 +443,45 @@ export default function ProductosPage() {
                   placeholder="6500"
                   value={prodPrecioPesos}
                   onChange={(e) => setProdPrecioPesos(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm font-mono"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">Stock inicial (u.)</label>
+                <label className="block text-xs font-bold text-slate-600 mb-1">Stock inicial (u.)</label>
                 <input
                   type="number"
                   min="0"
                   value={prodStockInicial}
                   onChange={(e) => setProdStockInicial(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm font-mono"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">Stock mínimo de alerta</label>
+                <label className="block text-xs font-bold text-slate-600 mb-1">Stock mínimo de alerta</label>
                 <input
                   type="number"
                   min="0"
                   value={prodStockMinimo}
                   onChange={(e) => setProdStockMinimo(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm font-mono"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm font-mono"
                 />
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-3 border-t border-[#edf0eb]">
+            <div className="flex justify-end gap-3 pt-3 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => setModalProducto(false)}
-                className="px-4 py-2 border border-[#d4ded4] bg-white text-[#355445] text-xs font-bold rounded-lg cursor-pointer"
+                className="px-4 py-2 border border-slate-200 bg-white text-slate-700 text-xs font-bold rounded-lg cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={guardandoProd}
-                className="px-4 py-2 bg-[#254d3c] hover:bg-[#34634d] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
+                className="px-4 py-2 bg-[#d97736] hover:bg-[#c86928] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
               >
                 {guardandoProd ? 'Guardando...' : 'Guardar producto'}
               </button>
@@ -495,21 +495,21 @@ export default function ProductosPage() {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <form
             onSubmit={handleGuardarMovimiento}
-            className="bg-white max-w-lg w-full rounded-2xl p-6 shadow-2xl border border-[#dfe4dc] space-y-4"
+            className="bg-white max-w-lg w-full rounded-2xl p-6 shadow-2xl border border-slate-200 space-y-4"
           >
-            <div className="border-b border-[#edf0eb] pb-3">
-              <h3 className="font-serif text-2xl font-bold text-[#20372d]">Registrar movimiento de stock</h3>
-              <p className="text-xs text-[#829087]">Ingreso de mercadería o egreso por rotura/ajuste.</p>
+            <div className="border-b border-slate-100 pb-3">
+              <h3 className="font-serif text-2xl font-bold text-slate-900">Registrar movimiento de stock</h3>
+              <p className="text-xs text-slate-400">Ingreso de mercadería o egreso por rotura/ajuste.</p>
             </div>
 
             <div className="space-y-3">
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">Producto *</label>
+                <label className="block text-xs font-bold text-slate-600 mb-1">Producto *</label>
                 <select
                   required
                   value={movProductoId}
                   onChange={(e) => setMovProductoId(parseInt(e.target.value, 10))}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 >
                   <option value={0}>Seleccioná un producto...</option>
                   {productos.map((p) => (
@@ -522,11 +522,11 @@ export default function ProductosPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#52675b] mb-1">Tipo de movimiento</label>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Tipo de movimiento</label>
                   <select
                     value={movTipo}
                     onChange={(e) => setMovTipo(e.target.value as any)}
-                    className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                    className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                   >
                     <option value="INGRESO">Entrada / Ingreso (+)</option>
                     <option value="EGRESO">Salida / Egreso (−)</option>
@@ -534,43 +534,43 @@ export default function ProductosPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#52675b] mb-1">Cantidad *</label>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Cantidad *</label>
                   <input
                     type="number"
                     min="1"
                     required
                     value={movCantidad}
                     onChange={(e) => setMovCantidad(e.target.value)}
-                    className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm font-mono"
+                    className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm font-mono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">Motivo o justificación *</label>
+                <label className="block text-xs font-bold text-slate-600 mb-1">Motivo o justificación *</label>
                 <input
                   type="text"
                   required
                   placeholder="Ej. Reposición de proveedor, rotura o ajuste de inventario"
                   value={movMotivo}
                   onChange={(e) => setMovMotivo(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-3 border-t border-[#edf0eb]">
+            <div className="flex justify-end gap-3 pt-3 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => setModalMovimiento(false)}
-                className="px-4 py-2 border border-[#d4ded4] bg-white text-[#355445] text-xs font-bold rounded-lg cursor-pointer"
+                className="px-4 py-2 border border-slate-200 bg-white text-slate-700 text-xs font-bold rounded-lg cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={guardandoMov}
-                className="px-4 py-2 bg-[#254d3c] hover:bg-[#34634d] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
+                className="px-4 py-2 bg-[#d97736] hover:bg-[#c86928] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
               >
                 {guardandoMov ? 'Registrando...' : 'Registrar movimiento'}
               </button>

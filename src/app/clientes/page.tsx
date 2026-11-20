@@ -195,13 +195,13 @@ export default function ClientesPage() {
       {/* Encabezado */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7">
         <div>
-          <div className="text-[10px] uppercase tracking-widest font-bold text-[#73877a] mb-1">
+          <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-1">
             Personas / Cuentas corrientes
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#20372d] font-normal tracking-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl text-slate-900 font-normal tracking-tight">
             Clientes y Saldos
           </h1>
-          <p className="text-[#758278] text-sm mt-1">
+          <p className="text-slate-500 text-sm mt-1">
             Consultá sus datos, ventas a crédito y registrá pagos recibidos.
           </p>
         </div>
@@ -209,7 +209,7 @@ export default function ClientesPage() {
         <button
           type="button"
           onClick={() => setModalNuevoCliente(true)}
-          className="px-4 py-2.5 rounded-lg bg-[#254d3c] hover:bg-[#34634d] text-white text-sm font-bold shadow transition-colors cursor-pointer"
+          className="px-4 py-2.5 rounded-lg bg-[#d97736] hover:bg-[#c86928] text-white text-sm font-bold shadow transition-colors cursor-pointer"
         >
           + Nuevo cliente
         </button>
@@ -217,26 +217,26 @@ export default function ClientesPage() {
 
       {/* Métricas rápidas */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm">
-          <p className="text-xs text-[#7b8b7e] font-medium mb-1">Clientes registrados</p>
-          <strong className="font-serif text-3xl text-[#294535] font-normal">
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <p className="text-xs text-slate-500 font-medium mb-1">Clientes registrados</p>
+          <strong className="font-serif text-3xl text-slate-900 font-normal">
             {clientes.length}
           </strong>
-          <small className="block text-xs text-[#8b998e] mt-1">En el padrón de comercio</small>
+          <small className="block text-xs text-slate-400 mt-1">En el padrón de comercio</small>
         </div>
-        <div className="bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm">
-          <p className="text-xs text-[#7b8b7e] font-medium mb-1">Total por cobrar</p>
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <p className="text-xs text-slate-500 font-medium mb-1">Total por cobrar</p>
           <strong className="font-serif text-3xl text-[#b85243] font-normal">
             {formatearCentavos(totalDeudaCentavos)}
           </strong>
-          <small className="block text-xs text-[#8b998e] mt-1">Suma de saldos deudores</small>
+          <small className="block text-xs text-slate-400 mt-1">Suma de saldos deudores</small>
         </div>
-        <div className="bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm">
-          <p className="text-xs text-[#7b8b7e] font-medium mb-1">Clientes con saldo pendiente</p>
-          <strong className="font-serif text-3xl text-[#294535] font-normal">
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <p className="text-xs text-slate-500 font-medium mb-1">Clientes con saldo pendiente</p>
+          <strong className="font-serif text-3xl text-slate-900 font-normal">
             {conDeudaCount}
           </strong>
-          <small className="block text-xs text-[#8b998e] mt-1">Cuentas con deuda activa</small>
+          <small className="block text-xs text-slate-400 mt-1">Cuentas con deuda activa</small>
         </div>
       </div>
 
@@ -249,7 +249,7 @@ export default function ClientesPage() {
               placeholder="Buscar por nombre o documento..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
-              className="w-full sm:max-w-md h-11 px-4 bg-white border border-[#dbe3da] rounded-xl text-sm text-[#293b31] focus:outline-none focus:ring-2 focus:ring-[#d8a448] shadow-sm"
+              className="w-full sm:max-w-md h-11 px-4 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#d97736] shadow-sm"
             />
           </div>
 
@@ -266,7 +266,7 @@ export default function ClientesPage() {
               return (
                 <div
                   key={cli.id}
-                  className="bg-white border border-[#e2e8df] border-l-4 border-l-[#d97562] rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:shadow transition-shadow"
+                  className="bg-white border border-slate-200 border-l-4 border-l-[#d97736] rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:shadow transition-shadow"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-[#ffe7dc] text-[#b45332] grid place-items-center font-bold text-sm">
@@ -274,7 +274,7 @@ export default function ClientesPage() {
                     </div>
                     <div>
                       <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="font-bold text-[#2e4839] text-base">
+                        <h3 className="font-bold text-slate-900 text-base">
                           {cli.nombre}
                         </h3>
                         {tieneDeuda ? (
@@ -287,17 +287,17 @@ export default function ClientesPage() {
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-[#4e6657] mt-1">
+                      <p className="text-xs text-slate-600 mt-1">
                         DNI/CUIT: <b className="font-mono">{cli.documento}</b>
-                        {cli.telefono && <span className="text-[#87948b]"> · Tel: {cli.telefono}</span>}
-                        {cli.email && <span className="text-[#87948b]"> · {cli.email}</span>}
+                        {cli.telefono && <span className="text-slate-400"> · Tel: {cli.telefono}</span>}
+                        {cli.email && <span className="text-slate-400"> · {cli.email}</span>}
                       </p>
                     </div>
                   </div>
 
                   <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2">
                     <div className="text-right">
-                      <span className="text-[10px] text-[#87958a] uppercase tracking-wider block font-semibold">
+                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-semibold">
                         Saldo adeudado
                       </span>
                       <strong className={`font-serif text-xl sm:text-2xl font-normal ${tieneDeuda ? 'text-[#b85243]' : 'text-[#378253]'}`}>
@@ -308,7 +308,7 @@ export default function ClientesPage() {
                     <button
                       type="button"
                       onClick={() => verCuenta(cli)}
-                      className="px-3.5 py-1.5 rounded-lg bg-[#254d3c] hover:bg-[#34634d] text-white text-xs font-bold transition-colors cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-lg bg-[#d97736] hover:bg-[#c86928] text-white text-xs font-bold transition-colors cursor-pointer"
                     >
                       Ver cuenta corriente →
                     </button>
@@ -321,20 +321,20 @@ export default function ClientesPage() {
       ) : (
         /* Vista de Ficha de Cuenta Corriente del Cliente */
         <div className="space-y-6">
-          <div className="flex justify-between items-center bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm">
+          <div className="flex justify-between items-center bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
             <div>
-              <div className="text-[10px] uppercase tracking-widest text-[#73877a] font-bold">
+              <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
                 Ficha de Cliente / Cuenta Corriente
               </div>
-              <h2 className="font-serif text-2xl font-bold text-[#20372d]">{clienteCuenta.nombre}</h2>
-              <p className="text-xs text-[#89968d]">
+              <h2 className="font-serif text-2xl font-bold text-slate-900">{clienteCuenta.nombre}</h2>
+              <p className="text-xs text-slate-400">
                 Doc: {clienteCuenta.documento} · Tel: {clienteCuenta.telefono || 'Sin teléfono'} · Email: {clienteCuenta.email || 'Sin email'}
               </p>
             </div>
             <button
               type="button"
               onClick={() => setClienteCuenta(null)}
-              className="px-4 py-2 border border-[#d4ded4] bg-white text-[#355445] text-xs font-bold rounded-lg hover:bg-[#fafbf7] cursor-pointer"
+              className="px-4 py-2 border border-slate-200 bg-white text-slate-700 text-xs font-bold rounded-lg hover:bg-slate-50 cursor-pointer"
             >
               ← Volver a clientes
             </button>
@@ -342,26 +342,26 @@ export default function ClientesPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             {/* Movimientos de cuenta */}
-            <div className="lg:col-span-8 bg-white border border-[#e1e7df] rounded-xl overflow-hidden shadow-sm">
-              <div className="p-5 border-b border-[#edf0eb] bg-[#fafbf8]">
-                <h3 className="text-sm font-bold text-[#20372d]">Movimientos de la cuenta</h3>
-                <p className="text-xs text-[#829087]">Ventas a crédito y pagos registrados.</p>
+            <div className="lg:col-span-8 bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+              <div className="p-5 border-b border-slate-100 bg-slate-50/70">
+                <h3 className="text-sm font-bold text-slate-900">Movimientos de la cuenta</h3>
+                <p className="text-xs text-slate-400">Ventas a crédito y pagos registrados.</p>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs border-collapse">
                   <thead>
-                    <tr className="bg-[#fafbf8] text-[10px] uppercase tracking-wider text-[#8a988d] border-b border-[#edf0eb]">
+                    <tr className="bg-slate-50/70 text-[10px] uppercase tracking-wider text-slate-400 border-b border-slate-100">
                       <th className="py-3 px-4">Fecha</th>
                       <th className="py-3 px-4">Concepto</th>
                       <th className="py-3 px-3 text-center">Tipo</th>
                       <th className="py-3 px-4 text-right">Importe</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#edf0eb]">
+                  <tbody className="divide-y divide-slate-100">
                     {movimientosCuenta.length === 0 ? (
                       <tr>
-                        <td colSpan={4} className="py-8 text-center text-[#89968b] text-sm">
+                        <td colSpan={4} className="py-8 text-center text-slate-400 text-sm">
                           No hay movimientos registrados en la cuenta de este cliente.
                         </td>
                       </tr>
@@ -369,11 +369,11 @@ export default function ClientesPage() {
                       movimientosCuenta.map((m, idx) => {
                         const esVenta = m.tipo === 'VENTA'
                         return (
-                          <tr key={idx} className="hover:bg-[#fafbf8]">
-                            <td className="py-3 px-4 font-mono text-[#89968d]">
+                          <tr key={idx} className="hover:bg-slate-50/70">
+                            <td className="py-3 px-4 font-mono text-slate-400">
                               {formatearFecha(m.fecha)}
                             </td>
-                            <td className="py-3 px-4 font-semibold text-[#2c4436]">
+                            <td className="py-3 px-4 font-semibold text-slate-900">
                               {esVenta
                                 ? `Venta #${String(m.numeroComprobante || m.facturaId).padStart(5, '0')}`
                                 : `Pago Recibo #${String(m.numeroRecibo || m.pagoId).padStart(5, '0')} ${m.observacion ? `(${m.observacion})` : ''}`}
@@ -402,15 +402,15 @@ export default function ClientesPage() {
             </div>
 
             {/* Saldo y Acción de Pago */}
-            <div className="lg:col-span-4 bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm space-y-5">
+            <div className="lg:col-span-4 bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-5">
               <div>
-                <span className="text-xs uppercase tracking-wider text-[#89968d] block font-bold">
+                <span className="text-xs uppercase tracking-wider text-slate-400 block font-bold">
                   Saldo adeudado
                 </span>
                 <strong className={`font-serif text-3xl sm:text-4xl font-normal block mt-1 ${clienteCuenta.saldoCentavos > 0 ? 'text-[#b85243]' : 'text-[#378253]'}`}>
                   {formatearCentavos(clienteCuenta.saldoCentavos)}
                 </strong>
-                <p className="text-xs text-[#89968b] mt-2 leading-relaxed">
+                <p className="text-xs text-slate-400 mt-2 leading-relaxed">
                   Suma de ventas a crédito menos pagos recibidos.
                 </p>
               </div>
@@ -419,7 +419,7 @@ export default function ClientesPage() {
                 type="button"
                 disabled={clienteCuenta.saldoCentavos <= 0}
                 onClick={() => setModalPago(true)}
-                className="w-full h-12 bg-[#254d3c] hover:bg-[#34634d] disabled:opacity-40 text-white font-bold rounded-lg transition-colors cursor-pointer text-sm shadow"
+                className="w-full h-12 bg-[#d97736] hover:bg-[#c86928] disabled:opacity-40 text-white font-bold rounded-lg transition-colors cursor-pointer text-sm shadow"
               >
                 {clienteCuenta.saldoCentavos > 0 ? 'Registrar cobro / pago →' : 'Cuenta al día (Sin saldo)'}
               </button>
@@ -433,17 +433,17 @@ export default function ClientesPage() {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <form
             onSubmit={handleRegistrarPago}
-            className="bg-white max-w-md w-full rounded-2xl p-6 shadow-2xl border border-[#dfe4dc] space-y-4"
+            className="bg-white max-w-md w-full rounded-2xl p-6 shadow-2xl border border-slate-200 space-y-4"
           >
-            <div className="border-b border-[#edf0eb] pb-3">
-              <h3 className="font-serif text-xl font-bold text-[#20372d]">Registrar pago</h3>
-              <p className="text-xs text-[#829087]">
+            <div className="border-b border-slate-100 pb-3">
+              <h3 className="font-serif text-xl font-bold text-slate-900">Registrar pago</h3>
+              <p className="text-xs text-slate-400">
                 Ingresá el cobro para {clienteCuenta.nombre}.
               </p>
             </div>
 
-            <div className="bg-[#fafbf8] p-3 rounded-lg border border-[#edf0eb] flex justify-between items-center text-xs">
-              <span className="text-[#89968d]">Saldo adeudado máximo:</span>
+            <div className="bg-slate-50/70 p-3 rounded-lg border border-slate-100 flex justify-between items-center text-xs">
+              <span className="text-slate-400">Saldo adeudado máximo:</span>
               <strong className="text-sm font-serif text-[#b85243] font-bold">
                 {formatearCentavos(clienteCuenta.saldoCentavos)}
               </strong>
@@ -457,7 +457,7 @@ export default function ClientesPage() {
 
             <div className="space-y-3">
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Importe a pagar ($) *
                 </label>
                 <input
@@ -467,18 +467,18 @@ export default function ClientesPage() {
                   placeholder={(clienteCuenta.saldoCentavos / 100).toString()}
                   value={pagoImportePesos}
                   onChange={(e) => setPagoImportePesos(e.target.value)}
-                  className="w-full h-10 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm font-mono text-lg font-bold text-[#20372d]"
+                  className="w-full h-10 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm font-mono text-lg font-bold text-slate-900"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Medio de pago
                 </label>
                 <select
                   value={pagoMedio}
                   onChange={(e) => setPagoMedio(e.target.value as any)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 >
                   <option value="efectivo">Efectivo</option>
                   <option value="transferencia">Transferencia bancaria</option>
@@ -487,7 +487,7 @@ export default function ClientesPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Observación (opcional)
                 </label>
                 <input
@@ -495,23 +495,23 @@ export default function ClientesPage() {
                   placeholder="Ej. Pago parcial o transferencia comprobante #9872"
                   value={pagoObservacion}
                   onChange={(e) => setPagoObservacion(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-3 border-t border-[#edf0eb]">
+            <div className="flex justify-end gap-3 pt-3 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => setModalPago(false)}
-                className="px-4 py-2 border border-[#d4ded4] bg-white text-[#355445] text-xs font-bold rounded-lg cursor-pointer"
+                className="px-4 py-2 border border-slate-200 bg-white text-slate-700 text-xs font-bold rounded-lg cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={guardandoPago}
-                className="px-4 py-2 bg-[#254d3c] hover:bg-[#34634d] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
+                className="px-4 py-2 bg-[#d97736] hover:bg-[#c86928] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
               >
                 {guardandoPago ? 'Registrando...' : 'Confirmar pago'}
               </button>
@@ -525,16 +525,16 @@ export default function ClientesPage() {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <form
             onSubmit={handleGuardarCliente}
-            className="bg-white max-w-lg w-full rounded-2xl p-6 shadow-2xl border border-[#dfe4dc] space-y-4"
+            className="bg-white max-w-lg w-full rounded-2xl p-6 shadow-2xl border border-slate-200 space-y-4"
           >
-            <div className="border-b border-[#edf0eb] pb-3">
-              <h3 className="font-serif text-2xl font-bold text-[#20372d]">Nuevo cliente</h3>
-              <p className="text-xs text-[#829087]">Completá los datos para venderle a cuenta corriente.</p>
+            <div className="border-b border-slate-100 pb-3">
+              <h3 className="font-serif text-2xl font-bold text-slate-900">Nuevo cliente</h3>
+              <p className="text-xs text-slate-400">Completá los datos para venderle a cuenta corriente.</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="col-span-2">
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Nombre y apellido o Razón Social *
                 </label>
                 <input
@@ -543,12 +543,12 @@ export default function ClientesPage() {
                   placeholder="Ej. Almacén Los Aromos"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   DNI o CUIT *
                 </label>
                 <input
@@ -557,12 +557,12 @@ export default function ClientesPage() {
                   placeholder="Ej. 30-71234567-8"
                   value={documento}
                   onChange={(e) => setDocumento(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Teléfono
                 </label>
                 <input
@@ -570,12 +570,12 @@ export default function ClientesPage() {
                   placeholder="Ej. 381 555-0123"
                   value={telefono}
                   onChange={(e) => setTelefono(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
 
               <div className="col-span-2">
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Correo electrónico
                 </label>
                 <input
@@ -583,12 +583,12 @@ export default function ClientesPage() {
                   placeholder="contacto@empresa.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Límite de crédito ($)
                 </label>
                 <input
@@ -596,35 +596,35 @@ export default function ClientesPage() {
                   placeholder="Sin límite"
                   value={limiteCreditoPesos}
                   onChange={(e) => setLimiteCreditoPesos(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm font-mono"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm font-mono"
                 />
               </div>
 
               <div className="flex items-center pt-5">
-                <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-[#354d3d]">
+                <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-800">
                   <input
                     type="checkbox"
                     checked={habilitadoCC}
                     onChange={(e) => setHabilitadoCC(e.target.checked)}
-                    className="accent-[#254d3c] w-4 h-4"
+                    className="accent-[#d97736] w-4 h-4"
                   />
                   <span>Habilitar cuenta corriente</span>
                 </label>
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-3 border-t border-[#edf0eb]">
+            <div className="flex justify-end gap-3 pt-3 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => setModalNuevoCliente(false)}
-                className="px-4 py-2 border border-[#d4ded4] bg-white text-[#355445] text-xs font-bold rounded-lg cursor-pointer"
+                className="px-4 py-2 border border-slate-200 bg-white text-slate-700 text-xs font-bold rounded-lg cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={guardandoCli}
-                className="px-4 py-2 bg-[#254d3c] hover:bg-[#34634d] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
+                className="px-4 py-2 bg-[#d97736] hover:bg-[#c86928] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
               >
                 {guardandoCli ? 'Guardando...' : 'Guardar cliente'}
               </button>

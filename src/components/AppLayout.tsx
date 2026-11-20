@@ -8,7 +8,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   const [sidebarAbierto, setSidebarAbierto] = useState(false)
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-[#f2f3ed] text-[#23332d]">
+    <div className="min-h-screen flex flex-col md:flex-row bg-[#f4f5f6] text-[#1e2429]">
       <Sidebar abierto={sidebarAbierto} setAbierto={setSidebarAbierto} />
       <div className="flex-1 flex flex-col min-w-0 w-full overflow-hidden">
         <Header onToggleSidebar={() => setSidebarAbierto(!sidebarAbierto)} />

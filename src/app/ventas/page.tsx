@@ -312,13 +312,13 @@ export default function VentasPage() {
       {/* Encabezado y Selector de Vista */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7">
         <div>
-          <div className="text-[10px] uppercase tracking-widest font-bold text-[#73877a] mb-1">
+          <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-1">
             Ventas / Mostrador
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#20372d] font-normal tracking-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl text-slate-900 font-normal tracking-tight">
             {vista === 'nueva' ? 'Crear una venta' : 'Ventas registradas'}
           </h1>
-          <p className="text-[#758278] text-sm mt-1">
+          <p className="text-slate-500 text-sm mt-1">
             {vista === 'nueva'
               ? 'Prepará el comprobante y registrá la operación en el mostrador.'
               : 'Consultá los comprobantes emitidos y descargá las ventas.'}
@@ -330,8 +330,8 @@ export default function VentasPage() {
             onClick={() => setVista('nueva')}
             className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-colors cursor-pointer ${
               vista === 'nueva'
-                ? 'bg-[#254d3c] text-white shadow'
-                : 'bg-white text-[#355445] border border-[#d4ded4] hover:bg-[#fafbf7]'
+                ? 'bg-[#d97736] text-white shadow'
+                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
             }`}
           >
             + Nueva venta
@@ -340,8 +340,8 @@ export default function VentasPage() {
             onClick={() => setVista('historial')}
             className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-colors cursor-pointer ${
               vista === 'historial'
-                ? 'bg-[#254d3c] text-white shadow'
-                : 'bg-white text-[#355445] border border-[#d4ded4] hover:bg-[#fafbf7]'
+                ? 'bg-[#d97736] text-white shadow'
+                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
             }`}
           >
             Ver ventas registradas ({ventasHistorial.length})
@@ -355,16 +355,16 @@ export default function VentasPage() {
           {/* Columna Izquierda: Cliente y Productos */}
           <div className="lg:col-span-8 space-y-6">
             {/* Panel Cliente */}
-            <div className="bg-white border border-[#e1e7df] rounded-xl overflow-hidden shadow-sm">
-              <div className="p-5 border-b border-[#edf0eb] flex justify-between items-center bg-[#fafbf8]">
+            <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+              <div className="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/70">
                 <div>
-                  <h2 className="text-sm font-bold text-[#20372d]">Cliente</h2>
-                  <p className="text-xs text-[#829087]">Elegí a quién corresponde la venta.</p>
+                  <h2 className="text-sm font-bold text-slate-900">Cliente</h2>
+                  <p className="text-xs text-slate-400">Elegí a quién corresponde la venta.</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setModalNuevoCliente(true)}
-                  className="text-xs text-[#38654c] hover:underline font-bold cursor-pointer"
+                  className="text-xs text-[#d97736] hover:underline font-bold cursor-pointer"
                 >
                   + Nuevo cliente
                 </button>
@@ -372,7 +372,7 @@ export default function VentasPage() {
 
               <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-[#52675b] mb-1">
+                  <label className="block text-xs font-bold text-slate-600 mb-1">
                     Comprador
                   </label>
                   <select
@@ -384,7 +384,7 @@ export default function VentasPage() {
                         setFormaPago('contado')
                       }
                     }}
-                    className="w-full h-10 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm text-[#293b31] focus:outline-none focus:ring-2 focus:ring-[#d8a448]"
+                    className="w-full h-10 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#d97736]"
                   >
                     <option value="">Consumidor final</option>
                     {clientes.map((c) => (
@@ -396,10 +396,10 @@ export default function VentasPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#52675b] mb-1">
+                  <label className="block text-xs font-bold text-slate-600 mb-1">
                     Documento / Cuenta Corriente
                   </label>
-                  <div className="h-10 px-3 bg-[#f3f5f0] border border-[#dbe3da] rounded-lg text-sm text-[#4e6657] flex items-center justify-between">
+                  <div className="h-10 px-3 bg-slate-100/60 border border-slate-200 rounded-lg text-sm text-slate-600 flex items-center justify-between">
                     <span>{clienteActual ? clienteActual.documento : '— Sin identificación'}</span>
                     {clienteActual && (
                       <span className="text-xs font-bold text-[#b85243]">
@@ -412,28 +412,28 @@ export default function VentasPage() {
             </div>
 
             {/* Panel Productos y Carrito */}
-            <div className="bg-white border border-[#e1e7df] rounded-xl overflow-hidden shadow-sm">
-              <div className="p-5 border-b border-[#edf0eb] flex justify-between items-center bg-[#fafbf8]">
+            <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+              <div className="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/70">
                 <div>
-                  <h2 className="text-sm font-bold text-[#20372d]">Productos</h2>
-                  <p className="text-xs text-[#829087]">Agregá los artículos de la venta.</p>
+                  <h2 className="text-sm font-bold text-slate-900">Productos</h2>
+                  <p className="text-xs text-slate-400">Agregá los artículos de la venta.</p>
                 </div>
-                <span className="text-xs px-2.5 py-1 rounded-md bg-[#eff1ec] text-[#66776b] font-bold">
+                <span className="text-xs px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 font-bold">
                   {items.length} productos ({cantidadArticulos} u.)
                 </span>
               </div>
 
               {/* Selector para agregar */}
-              <div className="p-5 border-b border-[#edf0eb]">
+              <div className="p-5 border-b border-slate-100">
                 <div className="flex flex-col sm:flex-row gap-3 items-end">
                   <div className="flex-1 w-full">
-                    <label className="block text-xs font-bold text-[#52675b] mb-1">
+                    <label className="block text-xs font-bold text-slate-600 mb-1">
                       Seleccionar producto del catálogo
                     </label>
                     <select
                       value={productoABorrar}
                       onChange={(e) => setProductoABorrar(e.target.value)}
-                      className="w-full h-10 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm text-[#293b31] focus:outline-none focus:ring-2 focus:ring-[#d8a448]"
+                      className="w-full h-10 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#d97736]"
                     >
                       <option value="">Buscar o seleccionar artículo...</option>
                       {productos
@@ -448,7 +448,7 @@ export default function VentasPage() {
                   <button
                     type="button"
                     onClick={agregarProducto}
-                    className="w-full sm:w-auto h-10 px-5 bg-[#254d3c] hover:bg-[#34634d] text-white font-bold rounded-lg text-sm cursor-pointer transition-colors shadow-sm"
+                    className="w-full sm:w-auto h-10 px-5 bg-[#d97736] hover:bg-[#c86928] text-white font-bold rounded-lg text-sm cursor-pointer transition-colors shadow-sm"
                   >
                     + Agregar
                   </button>
@@ -459,7 +459,7 @@ export default function VentasPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-sm border-collapse">
                   <thead>
-                    <tr className="bg-[#fafbf8] text-[10px] uppercase tracking-wider text-[#8a988d] border-b border-[#edf0eb]">
+                    <tr className="bg-slate-50/70 text-[10px] uppercase tracking-wider text-slate-400 border-b border-slate-100">
                       <th className="py-3 px-5">Producto</th>
                       <th className="py-3 px-3 text-center">Cantidad</th>
                       <th className="py-3 px-4 text-right">Precio</th>
@@ -467,30 +467,30 @@ export default function VentasPage() {
                       <th className="py-3 px-4 text-center">Acción</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#edf0eb]">
+                  <tbody className="divide-y divide-slate-100">
                     {items.length === 0 ? (
                       <tr>
-                        <td colSpan={5} className="py-8 text-center text-[#89968b] text-sm">
+                        <td colSpan={5} className="py-8 text-center text-slate-400 text-sm">
                           El comprobante está vacío. Agregá productos arriba.
                         </td>
                       </tr>
                     ) : (
                       items.map((item) => (
-                        <tr key={item.productoId} className="hover:bg-[#fafbf8]">
+                        <tr key={item.productoId} className="hover:bg-slate-50/70">
                           <td className="py-3 px-5">
-                            <div className="font-semibold text-[#2c4436]">
+                            <div className="font-semibold text-slate-900">
                               {item.descripcion}
                             </div>
-                            <div className="text-xs text-[#89968d]">
+                            <div className="text-xs text-slate-400">
                               Código: {item.codigo} · Disp: {item.existenciaDisponible}
                             </div>
                           </td>
                           <td className="py-3 px-3 text-center">
-                            <div className="inline-flex items-center border border-[#dbe3da] rounded-lg overflow-hidden bg-white">
+                            <div className="inline-flex items-center border border-slate-200 rounded-lg overflow-hidden bg-white">
                               <button
                                 type="button"
                                 onClick={() => modificarCantidad(item.productoId, -1)}
-                                className="w-8 h-8 flex items-center justify-center text-[#2c4436] hover:bg-[#edf0eb] font-bold"
+                                className="w-8 h-8 flex items-center justify-center text-slate-900 hover:bg-[#edf0eb] font-bold"
                               >
                                 −
                               </button>
@@ -500,16 +500,16 @@ export default function VentasPage() {
                               <button
                                 type="button"
                                 onClick={() => modificarCantidad(item.productoId, 1)}
-                                className="w-8 h-8 flex items-center justify-center text-[#2c4436] hover:bg-[#edf0eb] font-bold"
+                                className="w-8 h-8 flex items-center justify-center text-slate-900 hover:bg-[#edf0eb] font-bold"
                               >
                                 +
                               </button>
                             </div>
                           </td>
-                          <td className="py-3 px-4 text-right font-mono text-[#52675b]">
+                          <td className="py-3 px-4 text-right font-mono text-slate-600">
                             {formatearCentavos(item.precioUnitarioCentavos)}
                           </td>
-                          <td className="py-3 px-4 text-right font-mono font-bold text-[#20372d]">
+                          <td className="py-3 px-4 text-right font-mono font-bold text-slate-900">
                             {formatearCentavos(item.precioUnitarioCentavos * item.cantidad)}
                           </td>
                           <td className="py-3 px-4 text-center">
@@ -532,51 +532,51 @@ export default function VentasPage() {
 
           {/* Columna Derecha: Totales y Cobro */}
           <div className="lg:col-span-4">
-            <div className="bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm space-y-5 sticky top-24">
-              <div className="border-b border-[#edf0eb] pb-4">
-                <h2 className="text-base font-bold text-[#20372d]">Resumen de venta</h2>
-                <p className="text-xs text-[#829087]">Comprobante comercial interno</p>
+            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-5 sticky top-24">
+              <div className="border-b border-slate-100 pb-4">
+                <h2 className="text-base font-bold text-slate-900">Resumen de venta</h2>
+                <p className="text-xs text-slate-400">Comprobante comercial interno</p>
               </div>
 
               {/* Totales */}
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between text-[#697b6d]">
+                <div className="flex justify-between text-slate-500">
                   <span>Total unidades:</span>
                   <span className="font-semibold">{cantidadArticulos} u.</span>
                 </div>
-                <div className="flex justify-between text-[#697b6d]">
+                <div className="flex justify-between text-slate-500">
                   <span>Subtotal:</span>
                   <span className="font-mono">{formatearCentavos(totalCentavos)}</span>
                 </div>
-                <div className="flex justify-between items-baseline pt-3 border-t border-[#edf0eb] text-[#253d30] font-bold text-xl">
+                <div className="flex justify-between items-baseline pt-3 border-t border-slate-100 text-slate-900 font-bold text-xl">
                   <span>Total a pagar:</span>
-                  <span className="font-serif text-2xl text-[#20372d]">
+                  <span className="font-serif text-2xl text-slate-900">
                     {formatearCentavos(totalCentavos)}
                   </span>
                 </div>
               </div>
 
               {/* Formas de Pago */}
-              <div className="pt-2 border-t border-[#edf0eb]">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#52675b] mb-3">
+              <div className="pt-2 border-t border-slate-100">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-3">
                   Forma de pago
                 </h3>
                 <div className="space-y-2 text-sm">
-                  <label className="flex items-center gap-3 p-3 border border-[#e2e8df] rounded-lg cursor-pointer hover:bg-[#fafbf8]">
+                  <label className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50/70">
                     <input
                       type="radio"
                       name="pago"
                       checked={formaPago === 'contado'}
                       onChange={() => setFormaPago('contado')}
-                      className="accent-[#254d3c]"
+                      className="accent-[#d97736]"
                     />
-                    <span className="font-medium text-[#354d3d]">Contado / Efectivo</span>
+                    <span className="font-medium text-slate-800">Contado / Efectivo</span>
                   </label>
 
                   {formaPago === 'contado' && (
-                    <div className="p-3 bg-[#fafbf8] border border-[#e2e8df] rounded-lg space-y-2 text-xs">
+                    <div className="p-3 bg-slate-50/70 border border-slate-200 rounded-lg space-y-2 text-xs">
                       <div>
-                        <label className="block text-[#52675b] font-bold mb-1">
+                        <label className="block text-slate-600 font-bold mb-1">
                           Monto entregado ($)
                         </label>
                         <input
@@ -585,47 +585,47 @@ export default function VentasPage() {
                           placeholder={(totalCentavos / 100).toString()}
                           value={montoEntregadoPesos}
                           onChange={(e) => setMontoEntregadoPesos(e.target.value)}
-                          className="w-full h-9 px-2.5 bg-white border border-[#dbe3da] rounded text-sm"
+                          className="w-full h-9 px-2.5 bg-white border border-slate-200 rounded text-sm"
                         />
                       </div>
-                      <div className="flex justify-between text-sm font-bold pt-1 text-[#254d3c]">
+                      <div className="flex justify-between text-sm font-bold pt-1 text-[#d97736]">
                         <span>Vuelto:</span>
                         <span className="font-mono">{formatearCentavos(vueltoCentavos)}</span>
                       </div>
                     </div>
                   )}
 
-                  <label className="flex items-center gap-3 p-3 border border-[#e2e8df] rounded-lg cursor-pointer hover:bg-[#fafbf8]">
+                  <label className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50/70">
                     <input
                       type="radio"
                       name="pago"
                       checked={formaPago === 'tarjeta'}
                       onChange={() => setFormaPago('tarjeta')}
-                      className="accent-[#254d3c]"
+                      className="accent-[#d97736]"
                     />
-                    <span className="font-medium text-[#354d3d]">Tarjeta (débito / crédito)</span>
+                    <span className="font-medium text-slate-800">Tarjeta (débito / crédito)</span>
                   </label>
 
                   {formaPago === 'tarjeta' && (
-                    <div className="p-3 bg-[#fafbf8] border border-[#e2e8df] rounded-lg space-y-2 text-xs">
+                    <div className="p-3 bg-slate-50/70 border border-slate-200 rounded-lg space-y-2 text-xs">
                       <div className="grid grid-cols-2 gap-2">
                         <div>
-                          <label className="block text-[#52675b] font-bold mb-1">Tipo</label>
+                          <label className="block text-slate-600 font-bold mb-1">Tipo</label>
                           <select
                             value={tarjetaTipo}
                             onChange={(e) => setTarjetaTipo(e.target.value as any)}
-                            className="w-full h-8 px-2 bg-white border border-[#dbe3da] rounded"
+                            className="w-full h-8 px-2 bg-white border border-slate-200 rounded"
                           >
                             <option value="debito">Débito</option>
                             <option value="credito">Crédito</option>
                           </select>
                         </div>
                         <div>
-                          <label className="block text-[#52675b] font-bold mb-1">Marca</label>
+                          <label className="block text-slate-600 font-bold mb-1">Marca</label>
                           <select
                             value={tarjetaMarca}
                             onChange={(e) => setTarjetaMarca(e.target.value as any)}
-                            className="w-full h-8 px-2 bg-white border border-[#dbe3da] rounded"
+                            className="w-full h-8 px-2 bg-white border border-slate-200 rounded"
                           >
                             <option value="visa">Visa</option>
                             <option value="mastercard">Mastercard</option>
@@ -635,14 +635,14 @@ export default function VentasPage() {
                         </div>
                       </div>
                       <div>
-                        <label className="block text-[#52675b] font-bold mb-1">Últimos 4 dígitos</label>
+                        <label className="block text-slate-600 font-bold mb-1">Últimos 4 dígitos</label>
                         <input
                           type="text"
                           maxLength={4}
                           value={tarjetaUltimos4}
                           onChange={(e) => setTarjetaUltimos4(e.target.value.replace(/\D/g, ''))}
                           placeholder="1234"
-                          className="w-full h-8 px-2 bg-white border border-[#dbe3da] rounded text-center tracking-widest font-mono"
+                          className="w-full h-8 px-2 bg-white border border-slate-200 rounded text-center tracking-widest font-mono"
                         />
                       </div>
                     </div>
@@ -651,8 +651,8 @@ export default function VentasPage() {
                   <label
                     className={`flex items-center gap-3 p-3 border rounded-lg ${
                       clienteActual && clienteActual.habilitadoCuentaCorriente
-                        ? 'border-[#e2e8df] cursor-pointer hover:bg-[#fafbf8]'
-                        : 'border-[#edf0eb] opacity-60 cursor-not-allowed bg-[#fafbf8]'
+                        ? 'border-slate-200 cursor-pointer hover:bg-slate-50/70'
+                        : 'border-slate-100 opacity-60 cursor-not-allowed bg-slate-50/70'
                     }`}
                   >
                     <input
@@ -661,12 +661,12 @@ export default function VentasPage() {
                       disabled={!clienteActual || !clienteActual.habilitadoCuentaCorriente}
                       checked={formaPago === 'cuenta_corriente'}
                       onChange={() => setFormaPago('cuenta_corriente')}
-                      className="accent-[#254d3c]"
+                      className="accent-[#d97736]"
                     />
                     <div className="flex-1">
-                      <span className="font-medium text-[#354d3d] block">Cuenta corriente</span>
+                      <span className="font-medium text-slate-800 block">Cuenta corriente</span>
                       {!clienteActual ? (
-                        <small className="text-[10px] text-[#89968b]">
+                        <small className="text-[10px] text-slate-400">
                           Elegí un cliente registrado arriba
                         </small>
                       ) : !clienteActual.habilitadoCuentaCorriente ? (
@@ -693,12 +693,12 @@ export default function VentasPage() {
                 type="button"
                 disabled={confirmando || items.length === 0}
                 onClick={confirmarVenta}
-                className="w-full h-12 bg-[#254d3c] hover:bg-[#34634d] disabled:opacity-50 text-white font-bold rounded-lg transition-colors cursor-pointer text-sm shadow"
+                className="w-full h-12 bg-[#d97736] hover:bg-[#c86928] disabled:opacity-50 text-white font-bold rounded-lg transition-colors cursor-pointer text-sm shadow"
               >
                 {confirmando ? 'Procesando venta...' : 'Confirmar venta →'}
               </button>
 
-              <p className="text-[11px] text-[#89968b] text-center leading-relaxed">
+              <p className="text-[11px] text-slate-400 text-center leading-relaxed">
                 Al confirmar se descuentan automáticamente las existencias y se actualiza la cuenta corriente.
               </p>
             </div>
@@ -709,30 +709,30 @@ export default function VentasPage() {
         <div className="space-y-6">
           {/* Tarjetas de Estadísticas rápidas */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm">
-              <p className="text-xs text-[#7b8b7e] font-medium mb-1">Total operaciones</p>
-              <strong className="font-serif text-3xl text-[#294535] font-normal">
+            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+              <p className="text-xs text-slate-500 font-medium mb-1">Total operaciones</p>
+              <strong className="font-serif text-3xl text-slate-900 font-normal">
                 {ventasHistorial.length}
               </strong>
-              <small className="block text-xs text-[#8b998e] mt-1">Registradas en el sistema</small>
+              <small className="block text-xs text-slate-400 mt-1">Registradas en el sistema</small>
             </div>
-            <div className="bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm">
-              <p className="text-xs text-[#7b8b7e] font-medium mb-1">Total facturado</p>
-              <strong className="font-serif text-3xl text-[#294535] font-normal">
+            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+              <p className="text-xs text-slate-500 font-medium mb-1">Total facturado</p>
+              <strong className="font-serif text-3xl text-slate-900 font-normal">
                 {formatearCentavos(
                   ventasHistorial
                     .filter((v) => v.estado === 'EMITIDA')
                     .reduce((acc, v) => acc + v.totalCentavos, 0)
                 )}
               </strong>
-              <small className="block text-xs text-[#8b998e] mt-1">Facturas emitidas</small>
+              <small className="block text-xs text-slate-400 mt-1">Facturas emitidas</small>
             </div>
-            <div className="bg-white border border-[#e1e7df] rounded-xl p-5 shadow-sm">
-              <p className="text-xs text-[#7b8b7e] font-medium mb-1">Última operación</p>
-              <strong className="font-serif text-3xl text-[#294535] font-normal">
+            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+              <p className="text-xs text-slate-500 font-medium mb-1">Última operación</p>
+              <strong className="font-serif text-3xl text-slate-900 font-normal">
                 #{String(ventasHistorial[0]?.numero || 0).padStart(5, '0')}
               </strong>
-              <small className="block text-xs text-[#8b998e] mt-1">
+              <small className="block text-xs text-slate-400 mt-1">
                 {formatearFecha(ventasHistorial[0]?.fecha)}
               </small>
             </div>
@@ -752,7 +752,7 @@ export default function VentasPage() {
               return (
                 <div
                   key={venta.id}
-                  className="bg-white border border-[#e2e8df] border-l-4 border-l-[#4d9c76] rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:shadow transition-shadow"
+                  className="bg-white border border-slate-200 border-l-4 border-l-[#d97736] rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:shadow transition-shadow"
                 >
                   <div className="flex items-center gap-4">
                     <div className={`w-12 h-12 rounded-xl grid place-items-center font-bold text-sm ${iconBg}`}>
@@ -760,7 +760,7 @@ export default function VentasPage() {
                     </div>
                     <div>
                       <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="font-bold text-[#2e4839] text-base">
+                        <h3 className="font-bold text-slate-900 text-base">
                           Venta #{String(venta.numero).padStart(5, '0')}
                         </h3>
                         <span
@@ -777,20 +777,20 @@ export default function VentasPage() {
                             : venta.formaPago.replace('_', ' ').toUpperCase()}
                         </span>
                       </div>
-                      <p className="text-xs text-[#4e6657] mt-1">
+                      <p className="text-xs text-slate-600 mt-1">
                         {venta.clienteNombre}
                         {venta.clienteDocumento && (
-                          <span className="text-[#87948b]"> · Doc: {venta.clienteDocumento}</span>
+                          <span className="text-slate-400"> · Doc: {venta.clienteDocumento}</span>
                         )}
                       </p>
-                      <div className="text-[11px] text-[#89968d] mt-1">
+                      <div className="text-[11px] text-slate-400 mt-1">
                         {formatearFecha(venta.fecha)}
                       </div>
                     </div>
                   </div>
 
                   <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2">
-                    <span className="font-serif text-xl sm:text-2xl font-bold text-[#284735]">
+                    <span className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
                       {formatearCentavos(venta.totalCentavos)}
                     </span>
                     <button
@@ -801,7 +801,7 @@ export default function VentasPage() {
                           setComprobanteDetalle(await res.json())
                         }
                       }}
-                      className="px-3 py-1.5 rounded-lg border border-[#d4ded4] bg-white text-[#355445] text-xs font-bold hover:bg-[#fafbf7] transition-colors cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-700 text-xs font-bold hover:bg-slate-50 transition-colors cursor-pointer"
                     >
                       Ver comprobante
                     </button>
@@ -816,36 +816,36 @@ export default function VentasPage() {
       {/* MODAL: COMPROBANTE EMITIDO CON ÉXITO */}
       {comprobanteEmitido && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white max-w-lg w-full rounded-2xl p-6 shadow-2xl border border-[#dfe4dc] space-y-5">
-            <div className="text-center border-b border-[#edf0eb] pb-4">
+          <div className="bg-white max-w-lg w-full rounded-2xl p-6 shadow-2xl border border-slate-200 space-y-5">
+            <div className="text-center border-b border-slate-100 pb-4">
               <div className="w-12 h-12 bg-[#def4e7] text-[#387e56] rounded-full mx-auto grid place-items-center text-xl font-bold mb-2">
                 ✓
               </div>
-              <h3 className="font-serif text-2xl font-bold text-[#20372d]">
+              <h3 className="font-serif text-2xl font-bold text-slate-900">
                 ¡Venta #{String(comprobanteEmitido.numero).padStart(5, '0')} confirmada!
               </h3>
-              <p className="text-xs text-[#687e6e] mt-1">
+              <p className="text-xs text-slate-500 mt-1">
                 Comprobante comercial emitido y stock descargado.
               </p>
             </div>
 
-            <div className="bg-[#fafbf8] border border-[#edf0eb] rounded-xl p-4 text-xs space-y-2">
+            <div className="bg-slate-50/70 border border-slate-100 rounded-xl p-4 text-xs space-y-2">
               <div className="flex justify-between">
-                <span className="text-[#89968d]">Cliente:</span>
-                <span className="font-bold text-[#20372d]">{comprobanteEmitido.clienteNombre}</span>
+                <span className="text-slate-400">Cliente:</span>
+                <span className="font-bold text-slate-900">{comprobanteEmitido.clienteNombre}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#89968d]">Forma de pago:</span>
-                <span className="font-bold uppercase text-[#20372d]">{comprobanteEmitido.formaPago}</span>
+                <span className="text-slate-400">Forma de pago:</span>
+                <span className="font-bold uppercase text-slate-900">{comprobanteEmitido.formaPago}</span>
               </div>
-              <div className="flex justify-between pt-2 border-t border-[#edf0eb] text-sm">
-                <span className="font-bold text-[#20372d]">Total:</span>
-                <span className="font-mono font-bold text-[#254d3c] text-base">
+              <div className="flex justify-between pt-2 border-t border-slate-100 text-sm">
+                <span className="font-bold text-slate-900">Total:</span>
+                <span className="font-mono font-bold text-[#d97736] text-base">
                   {formatearCentavos(comprobanteEmitido.totalCentavos)}
                 </span>
               </div>
               {comprobanteEmitido.vueltoCentavos !== undefined && comprobanteEmitido.vueltoCentavos > 0 && (
-                <div className="flex justify-between text-xs font-bold text-[#254d3c]">
+                <div className="flex justify-between text-xs font-bold text-[#d97736]">
                   <span>Vuelto:</span>
                   <span>{formatearCentavos(comprobanteEmitido.vueltoCentavos)}</span>
                 </div>
@@ -856,14 +856,14 @@ export default function VentasPage() {
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="flex-1 h-11 bg-white border border-[#d4ded4] hover:bg-[#fafbf7] text-[#355445] font-bold rounded-lg text-sm transition-colors cursor-pointer"
+                className="flex-1 h-11 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold rounded-lg text-sm transition-colors cursor-pointer"
               >
                 🖨 Imprimir
               </button>
               <button
                 type="button"
                 onClick={() => setComprobanteEmitido(null)}
-                className="flex-1 h-11 bg-[#254d3c] hover:bg-[#34634d] text-white font-bold rounded-lg text-sm transition-colors cursor-pointer"
+                className="flex-1 h-11 bg-[#d97736] hover:bg-[#c86928] text-white font-bold rounded-lg text-sm transition-colors cursor-pointer"
               >
                 Cerrar y continuar
               </button>
@@ -875,40 +875,40 @@ export default function VentasPage() {
       {/* MODAL: VER DETALLE DE COMPROBANTE HISTÓRICO */}
       {comprobanteDetalle && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white max-w-xl w-full rounded-2xl p-6 shadow-2xl border border-[#dfe4dc] space-y-4 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-start border-b border-[#edf0eb] pb-3">
+          <div className="bg-white max-w-xl w-full rounded-2xl p-6 shadow-2xl border border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-start border-b border-slate-100 pb-3">
               <div>
-                <span className="text-xs uppercase tracking-widest text-[#73877a] font-bold">
+                <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">
                   Comprobante interno
                 </span>
-                <h2 className="font-serif text-2xl font-bold text-[#20372d]">
+                <h2 className="font-serif text-2xl font-bold text-slate-900">
                   Venta #{String(comprobanteDetalle.numero).padStart(5, '0')}
                 </h2>
-                <p className="text-xs text-[#89968d]">{formatearFecha(comprobanteDetalle.fecha)}</p>
+                <p className="text-xs text-slate-400">{formatearFecha(comprobanteDetalle.fecha)}</p>
               </div>
               <button
                 type="button"
                 onClick={() => setComprobanteDetalle(null)}
-                className="w-8 h-8 rounded-full bg-[#edf0eb] text-[#355445] hover:bg-[#dfe4dc] font-bold text-sm cursor-pointer"
+                className="w-8 h-8 rounded-full bg-[#edf0eb] text-slate-700 hover:bg-[#dfe4dc] font-bold text-sm cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 text-xs bg-[#fafbf8] p-3 rounded-xl border border-[#edf0eb]">
+            <div className="grid grid-cols-2 gap-3 text-xs bg-slate-50/70 p-3 rounded-xl border border-slate-100">
               <div>
-                <span className="text-[#89968d] block">Cliente</span>
-                <strong className="text-[#20372d] font-semibold">{comprobanteDetalle.clienteNombre}</strong>
+                <span className="text-slate-400 block">Cliente</span>
+                <strong className="text-slate-900 font-semibold">{comprobanteDetalle.clienteNombre}</strong>
               </div>
               <div>
-                <span className="text-[#89968d] block">Forma de pago</span>
-                <strong className="text-[#20372d] font-semibold uppercase">{comprobanteDetalle.formaPago}</strong>
+                <span className="text-slate-400 block">Forma de pago</span>
+                <strong className="text-slate-900 font-semibold uppercase">{comprobanteDetalle.formaPago}</strong>
               </div>
             </div>
 
-            <div className="border border-[#edf0eb] rounded-xl overflow-hidden">
+            <div className="border border-slate-100 rounded-xl overflow-hidden">
               <table className="w-full text-left text-xs">
-                <thead className="bg-[#fafbf8] text-[#8a988d] uppercase tracking-wider border-b border-[#edf0eb]">
+                <thead className="bg-slate-50/70 text-slate-400 uppercase tracking-wider border-b border-slate-100">
                   <tr>
                     <th className="py-2.5 px-3">Artículo</th>
                     <th className="py-2.5 px-2 text-center">Cant</th>
@@ -916,13 +916,13 @@ export default function VentasPage() {
                     <th className="py-2.5 px-3 text-right">Subtotal</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#edf0eb]">
+                <tbody className="divide-y divide-slate-100">
                   {comprobanteDetalle.productos?.map((p: any, idx: number) => (
                     <tr key={idx}>
-                      <td className="py-2 px-3 font-medium text-[#2c4436]">{p.descripcion}</td>
+                      <td className="py-2 px-3 font-medium text-slate-900">{p.descripcion}</td>
                       <td className="py-2 px-2 text-center font-bold">{p.cantidad}</td>
                       <td className="py-2 px-3 text-right font-mono">{formatearCentavos(p.precioUnitarioCentavos)}</td>
-                      <td className="py-2 px-3 text-right font-mono font-bold text-[#20372d]">
+                      <td className="py-2 px-3 text-right font-mono font-bold text-slate-900">
                         {formatearCentavos(p.subtotalCentavos)}
                       </td>
                     </tr>
@@ -931,25 +931,25 @@ export default function VentasPage() {
               </table>
             </div>
 
-            <div className="flex justify-between items-center pt-2 text-lg font-bold text-[#20372d]">
+            <div className="flex justify-between items-center pt-2 text-lg font-bold text-slate-900">
               <span>Total comprobante:</span>
-              <span className="font-serif text-2xl font-bold text-[#254d3c]">
+              <span className="font-serif text-2xl font-bold text-[#d97736]">
                 {formatearCentavos(comprobanteDetalle.totalCentavos)}
               </span>
             </div>
 
-            <div className="flex justify-end gap-3 pt-3 border-t border-[#edf0eb]">
+            <div className="flex justify-end gap-3 pt-3 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="px-4 py-2 bg-white border border-[#d4ded4] hover:bg-[#fafbf7] text-[#355445] text-xs font-bold rounded-lg cursor-pointer"
+                className="px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold rounded-lg cursor-pointer"
               >
                 🖨 Imprimir
               </button>
               <button
                 type="button"
                 onClick={() => setComprobanteDetalle(null)}
-                className="px-4 py-2 bg-[#254d3c] hover:bg-[#34634d] text-white text-xs font-bold rounded-lg cursor-pointer"
+                className="px-4 py-2 bg-[#d97736] hover:bg-[#c86928] text-white text-xs font-bold rounded-lg cursor-pointer"
               >
                 Cerrar
               </button>
@@ -963,18 +963,18 @@ export default function VentasPage() {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <form
             onSubmit={guardarNuevoCliente}
-            className="bg-white max-w-md w-full rounded-2xl p-6 shadow-2xl border border-[#dfe4dc] space-y-4"
+            className="bg-white max-w-md w-full rounded-2xl p-6 shadow-2xl border border-slate-200 space-y-4"
           >
-            <div className="border-b border-[#edf0eb] pb-3">
-              <h3 className="font-serif text-xl font-bold text-[#20372d]">Nuevo cliente rápido</h3>
-              <p className="text-xs text-[#829087]">
+            <div className="border-b border-slate-100 pb-3">
+              <h3 className="font-serif text-xl font-bold text-slate-900">Nuevo cliente rápido</h3>
+              <p className="text-xs text-slate-400">
                 Registralo ahora sin perder los productos de la venta en curso.
               </p>
             </div>
 
             <div className="space-y-3">
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Nombre y apellido o Razón Social *
                 </label>
                 <input
@@ -983,12 +983,12 @@ export default function VentasPage() {
                   value={nuevoClienteNombre}
                   onChange={(e) => setNuevoClienteNombre(e.target.value)}
                   placeholder="Ej. María González"
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   DNI o CUIT *
                 </label>
                 <input
@@ -997,12 +997,12 @@ export default function VentasPage() {
                   value={nuevoClienteDoc}
                   onChange={(e) => setNuevoClienteDoc(e.target.value)}
                   placeholder="Ej. 28.456.123"
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Teléfono (opcional)
                 </label>
                 <input
@@ -1010,12 +1010,12 @@ export default function VentasPage() {
                   value={nuevoClienteTel}
                   onChange={(e) => setNuevoClienteTel(e.target.value)}
                   placeholder="Ej. 381 555-0123"
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Correo electrónico (opcional)
                 </label>
                 <input
@@ -1023,23 +1023,23 @@ export default function VentasPage() {
                   value={nuevoClienteEmail}
                   onChange={(e) => setNuevoClienteEmail(e.target.value)}
                   placeholder="nombre@ejemplo.com"
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-3 border-t border-[#edf0eb]">
+            <div className="flex justify-end gap-3 pt-3 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => setModalNuevoCliente(false)}
-                className="px-4 py-2 border border-[#d4ded4] bg-white text-[#355445] text-xs font-bold rounded-lg cursor-pointer"
+                className="px-4 py-2 border border-slate-200 bg-white text-slate-700 text-xs font-bold rounded-lg cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={guardandoCliente}
-                className="px-4 py-2 bg-[#254d3c] hover:bg-[#34634d] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
+                className="px-4 py-2 bg-[#d97736] hover:bg-[#c86928] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
               >
                 {guardandoCliente ? 'Guardando...' : 'Guardar y seleccionar'}
               </button>

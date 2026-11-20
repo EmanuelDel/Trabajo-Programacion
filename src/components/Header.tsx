@@ -62,7 +62,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
 
   return (
     <>
-      <header className="h-16 border-b border-[#e2eae4] bg-white/80 backdrop-blur-md flex items-center justify-between px-4 sm:px-8 text-sm sticky top-0 z-20 shadow-xs">
+      <header className="h-16 border-b border-[#e2e5e8] bg-white/85 backdrop-blur-md flex items-center justify-between px-4 sm:px-8 text-sm sticky top-0 z-20 shadow-xs">
         {/* Left: Mobile Menu Trigger + Status Badge */}
         <div className="flex items-center gap-3">
           {onToggleSidebar && (
@@ -76,8 +76,8 @@ export function Header({ onToggleSidebar }: HeaderProps) {
             </button>
           )}
 
-          <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-[11px] font-semibold text-emerald-800">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-[11px] font-semibold text-slate-700">
+            <span className="w-2 h-2 rounded-full bg-[#d97736] animate-pulse"></span>
             <span className="hidden sm:inline">Terminal operativa y sincronizada</span>
             <span className="sm:hidden">Online</span>
           </div>
@@ -88,7 +88,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
           {usuario ? (
             <div className="flex items-center gap-2 sm:gap-4">
               <div className="flex items-center gap-2 sm:gap-3 pr-2 sm:pr-3 border-r border-slate-200">
-                <div className="w-8 h-8 rounded-lg bg-[#eaf4ee] text-[#143224] border border-[#c4dcce] flex items-center justify-center text-xs font-black shadow-xs shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 text-slate-800 border border-slate-300 flex items-center justify-center text-xs font-black shadow-xs shrink-0">
                   {iniciales}
                 </div>
                 <div className="text-left hidden sm:block">
@@ -97,7 +97,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
                     <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded ${
                       usuario.rol === 'admin' 
                         ? 'bg-purple-100 text-purple-800' 
-                        : 'bg-emerald-100 text-emerald-800'
+                        : 'bg-orange-100 text-[#b5551b]'
                     }`}>
                       {rolLabel}
                     </span>
@@ -136,11 +136,11 @@ export function Header({ onToggleSidebar }: HeaderProps) {
 
       {/* Modal para cambiar contraseña */}
       {modalPasswordAbierto && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-150">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-slate-100 text-[#0f241b] flex items-center justify-center">
-                <KeyRound className="w-5 h-5 text-slate-700" />
+              <div className="w-10 h-10 rounded-xl bg-orange-50 text-[#d97736] flex items-center justify-center">
+                <KeyRound className="w-5 h-5 text-[#d97736]" />
               </div>
               <div>
                 <h3 className="text-base font-bold text-slate-900 leading-tight">Cambiar mi contraseña</h3>
@@ -171,7 +171,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
                   required
                   value={passwordActual}
                   onChange={(e) => setPasswordActual(e.target.value)}
-                  className="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0f241b] focus:border-transparent transition-all"
+                  className="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#d97736] focus:border-transparent transition-all"
                   placeholder="••••••••"
                 />
               </div>
@@ -186,7 +186,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
                   minLength={8}
                   value={passwordNueva}
                   onChange={(e) => setPasswordNueva(e.target.value)}
-                  className="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0f241b] focus:border-transparent transition-all"
+                  className="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#d97736] focus:border-transparent transition-all"
                   placeholder="Mínimo 8 caracteres"
                 />
               </div>
@@ -203,7 +203,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
                 <button
                   type="submit"
                   disabled={cargando}
-                  className="px-4 py-2 text-xs font-bold text-white bg-[#0f241b] hover:bg-[#18392b] rounded-xl transition-all cursor-pointer disabled:opacity-50 shadow-xs"
+                  className="px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-[#d97736] to-[#c76522] hover:from-[#c76522] hover:to-[#b05518] rounded-xl transition-all cursor-pointer disabled:opacity-50 shadow-xs"
                 >
                   {cargando ? 'Guardando...' : 'Actualizar clave'}
                 </button>

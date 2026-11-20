@@ -87,7 +87,7 @@ export default function TableroPage() {
     return (
       <AppLayout>
         <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3">
-          <div className="w-10 h-10 border-3 border-[#0f241b] border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-10 h-10 border-3 border-[#d97736] border-t-transparent rounded-full animate-spin"></div>
           <p className="text-xs font-semibold tracking-wide uppercase text-slate-500">
             Sincronizando métricas en tiempo real...
           </p>
@@ -121,19 +121,19 @@ export default function TableroPage() {
       {
         label: 'Facturación ($)',
         data: lineValues,
-        borderColor: '#0f241b',
+        borderColor: '#d97736',
         backgroundColor: (context: any) => {
           const ctx = context.chart.ctx
           const gradient = ctx.createLinearGradient(0, 0, 0, 300)
-          gradient.addColorStop(0, 'rgba(15, 36, 27, 0.25)')
-          gradient.addColorStop(1, 'rgba(15, 36, 27, 0.0)')
+          gradient.addColorStop(0, 'rgba(217, 119, 54, 0.18)')
+          gradient.addColorStop(1, 'rgba(217, 119, 54, 0.0)')
           return gradient
         },
         borderWidth: 2.5,
         tension: 0.35,
         fill: true,
         pointBackgroundColor: '#ffffff',
-        pointBorderColor: '#0f241b',
+        pointBorderColor: '#d97736',
         pointBorderWidth: 2,
         pointRadius: 3,
         pointHoverRadius: 6
@@ -147,7 +147,7 @@ export default function TableroPage() {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: '#0f241b',
+        backgroundColor: '#1f2429',
         titleFont: { size: 12, weight: 'bold' as const },
         bodyFont: { size: 12 },
         padding: 10,
@@ -190,7 +190,7 @@ export default function TableroPage() {
     datasets: [
       {
         data: doughnutValues,
-        backgroundColor: ['#10b981', '#3b82f6', '#f59e0b'],
+        backgroundColor: ['#d97736', '#475569', '#3b82f6'],
         borderWidth: 3,
         borderColor: '#ffffff',
         hoverOffset: 4
@@ -207,7 +207,7 @@ export default function TableroPage() {
         labels: { boxWidth: 10, font: { size: 11 }, padding: 16 }
       },
       tooltip: {
-        backgroundColor: '#0f241b',
+        backgroundColor: '#1f2429',
         padding: 10,
         cornerRadius: 8,
         callbacks: {
@@ -222,11 +222,11 @@ export default function TableroPage() {
     <AppLayout>
       <div className="space-y-8 max-w-6xl mx-auto">
         {/* Banner Hero Comercial */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0f241b] via-[#16382a] to-[#1d4735] p-8 text-white shadow-lg border border-[#27533f]">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#1f2429] via-[#28313b] to-[#313c49] p-8 text-white shadow-lg border border-slate-700/60">
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="max-w-xl space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-[#c6e980]">
-                <Sparkles className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-[#f29a59]">
+                <Sparkles className="w-3.5 h-3.5 text-[#f29a59]" />
                 <span>Panel Estratégico de Ventas</span>
               </div>
               <h1 className="font-serif text-3xl sm:text-4xl font-extrabold tracking-tight">
@@ -240,7 +240,7 @@ export default function TableroPage() {
             <div className="flex items-center gap-3 shrink-0">
               <Link
                 href="/ventas"
-                className="group flex items-center gap-2 px-5 py-3 rounded-2xl bg-[#c6e980] hover:bg-[#b2dc5e] text-[#0f241b] font-bold text-xs uppercase tracking-wider shadow-md transition-all cursor-pointer"
+                className="group flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#d97736] to-[#c86928] hover:from-[#c86928] hover:to-[#b75d21] text-white font-bold text-xs uppercase tracking-wider shadow-md transition-all cursor-pointer"
               >
                 <ShoppingBag className="w-4 h-4" />
                 <span>Abrir Mostrador</span>
@@ -250,7 +250,7 @@ export default function TableroPage() {
           </div>
 
           {/* Adorno estético tenue */}
-          <div className="absolute -right-16 -bottom-24 w-80 h-80 rounded-full bg-[#c6e980]/5 blur-3xl pointer-events-none"></div>
+          <div className="absolute -right-16 -bottom-24 w-80 h-80 rounded-full bg-[#d97736]/10 blur-3xl pointer-events-none"></div>
         </div>
 
         {/* Tarjetas KPI de Alto Impacto */}
@@ -420,7 +420,7 @@ export default function TableroPage() {
             </div>
             <Link
               href="/productos"
-              className="text-xs font-bold text-[#0f241b] hover:text-[#1d4735] flex items-center gap-1 group"
+              className="text-xs font-bold text-[#d97736] hover:text-[#c86928] flex items-center gap-1 group"
             >
               <span>Ver catálogo completo</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -452,7 +452,7 @@ export default function TableroPage() {
                 </div>
 
                 <div className="text-right shrink-0">
-                  <p className="text-xs font-black text-[#0f241b]">
+                  <p className="text-xs font-black text-slate-800">
                     {prod.unidades} {prod.unidades === 1 ? 'unidad' : 'unidades'}
                   </p>
                   <p className="text-[11px] font-medium text-slate-500">

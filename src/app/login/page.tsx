@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
+import { Store } from 'lucide-react'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -47,30 +48,35 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#1d3930] flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-2xl p-8 shadow-2xl border border-[#dfe4dc]">
+    <div className="min-h-screen bg-gradient-to-br from-[#1f2429] via-[#242b32] to-[#2c343d] flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-white rounded-3xl p-8 sm:p-10 shadow-2xl border border-slate-700/20">
         {/* Brand */}
         <div className="flex flex-col items-center mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-[#d4ed91] text-[#1d3930] grid place-items-center font-black text-2xl shadow-md mb-3">
-            M
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#e07d38] to-[#c76522] text-white flex items-center justify-center shadow-lg mb-4">
+            <Store className="w-7 h-7 text-white" strokeWidth={2.2} />
           </div>
-          <h1 className="font-serif text-3xl font-bold text-[#20372d] tracking-tight">
-            mostrador
-          </h1>
-          <p className="text-xs uppercase tracking-widest text-[#73877a] font-semibold mt-1">
-            Sistema de Gestión Comercial
+          <div className="flex items-center gap-2">
+            <h1 className="font-sans text-2xl font-bold text-[#1e2429] tracking-tight">
+              Mostrador
+            </h1>
+            <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-orange-50 text-[#d97736] border border-orange-200">
+              PRO
+            </span>
+          </div>
+          <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold mt-1">
+            Gestión Comercial & Facturación
           </p>
         </div>
 
         {error && (
-          <div className="mb-6 p-3 rounded-lg bg-[#fef2f2] border border-[#fecaca] text-[#b91c1c] text-sm">
+          <div className="mb-6 p-3 rounded-xl bg-[#fef2f2] border border-[#fecaca] text-[#b91c1c] text-sm text-center font-medium">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-[#52675b] uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
               Correo o usuario
             </label>
             <input
@@ -79,12 +85,12 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@comercio.com"
               required
-              className="w-full h-11 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm text-[#293b31] focus:outline-none focus:ring-2 focus:ring-[#d8a448]"
+              className="w-full h-11 px-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#d97736] focus:bg-white transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#52675b] uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
               Contraseña
             </label>
             <input
@@ -93,36 +99,36 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
-              className="w-full h-11 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm text-[#293b31] focus:outline-none focus:ring-2 focus:ring-[#d8a448]"
+              className="w-full h-11 px-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#d97736] focus:bg-white transition-all"
             />
           </div>
 
           <button
             type="submit"
             disabled={cargando}
-            className="w-full h-12 bg-[#254d3c] hover:bg-[#34634d] text-white font-bold rounded-lg transition-colors cursor-pointer disabled:opacity-50 mt-2 shadow"
+            className="w-full h-12 bg-gradient-to-r from-[#d97736] to-[#c86928] hover:from-[#c86928] hover:to-[#b75d21] text-white font-bold rounded-xl transition-all cursor-pointer disabled:opacity-50 mt-2 shadow-md flex items-center justify-center text-sm"
           >
             {cargando ? 'Ingresando...' : 'Iniciar sesión →'}
           </button>
         </form>
 
         {/* Acceso rápido para la defensa / pruebas */}
-        <div className="mt-8 pt-6 border-t border-[#edf0eb] text-center">
-          <p className="text-xs text-[#89968b] font-medium mb-3">
+        <div className="mt-8 pt-6 border-t border-slate-100 text-center">
+          <p className="text-xs text-slate-400 font-medium mb-3">
             Accesos de prueba rápidos:
           </p>
           <div className="flex gap-2 justify-center">
             <button
               type="button"
               onClick={() => loginRapido('admin@comercio.com', 'admin123')}
-              className="px-3 py-1.5 rounded-lg bg-[#eaf4e5] text-[#2e522b] text-xs font-semibold hover:bg-[#dcecd5] transition-colors border border-[#cde0c4]"
+              className="px-3.5 py-1.5 rounded-xl bg-[#fef4ec] text-[#c86928] text-xs font-semibold hover:bg-[#fee7d6] transition-colors border border-[#fed7aa]"
             >
               👑 Administradora
             </button>
             <button
               type="button"
               onClick={() => loginRapido('vendedor@comercio.com', 'vendedor123')}
-              className="px-3 py-1.5 rounded-lg bg-[#e2f1ff] text-[#204e79] text-xs font-semibold hover:bg-[#d2e7fc] transition-colors border border-[#c3defb]"
+              className="px-3.5 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 transition-colors border border-slate-200"
             >
               💼 Vendedora
             </button>

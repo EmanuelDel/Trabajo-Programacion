@@ -133,17 +133,17 @@ export default function UsuariosPage() {
     <AppLayout>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="font-serif text-3xl font-extrabold text-[#20372d] tracking-tight">
+          <h1 className="font-serif text-3xl font-extrabold text-slate-900 tracking-tight">
             Usuarios y accesos
           </h1>
-          <p className="text-[#657d6f] text-sm mt-1">
+          <p className="text-slate-500 text-sm mt-1">
             Administrá los perfiles del sistema, credenciales y roles de trabajo.
           </p>
         </div>
 
         <button
           onClick={() => setModalNuevo(true)}
-          className="bg-[#244f3d] hover:bg-[#326750] text-[#e8f1e9] font-bold px-4 py-2.5 rounded-xl shadow-sm flex items-center gap-2 text-sm transition-all cursor-pointer"
+          className="bg-[#d97736] hover:bg-[#c86928] text-white font-bold px-4 py-2.5 rounded-xl shadow-sm flex items-center gap-2 text-sm transition-all cursor-pointer"
         >
           <span>+</span>
           <span>Nuevo usuario</span>
@@ -152,13 +152,13 @@ export default function UsuariosPage() {
 
       <div className="grid grid-cols-1 gap-4">
         {cargando && (
-          <div className="p-8 text-center text-[#74877b] text-sm bg-white rounded-xl border border-[#edf0eb]">
+          <div className="p-8 text-center text-slate-500 text-sm bg-white rounded-xl border border-slate-100">
             Cargando lista de usuarios...
           </div>
         )}
 
         {!cargando && usuarios.length === 0 && (
-          <div className="p-8 text-center text-[#74877b] text-sm bg-white rounded-xl border border-[#edf0eb]">
+          <div className="p-8 text-center text-slate-500 text-sm bg-white rounded-xl border border-slate-100">
             No hay usuarios registrados.
           </div>
         )}
@@ -176,7 +176,7 @@ export default function UsuariosPage() {
           return (
             <div
               key={u.id}
-              className={`bg-white border border-[#e5ebe3] border-l-4 ${
+              className={`bg-white border border-slate-200 border-l-4 ${
                 !u.activo
                   ? 'border-l-[#d2dad4] opacity-75'
                   : esAdmin
@@ -188,7 +188,7 @@ export default function UsuariosPage() {
                 <div
                   className={`w-12 h-12 rounded-xl grid place-items-center font-bold text-sm ${
                     !u.activo
-                      ? 'bg-[#edf0eb] text-[#89968d]'
+                      ? 'bg-[#edf0eb] text-slate-400'
                       : esAdmin
                       ? 'bg-[#eee7ff] text-[#7053a3]'
                       : 'bg-[#e1f2f1] text-[#347d82]'
@@ -198,7 +198,7 @@ export default function UsuariosPage() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="font-bold text-[#2e4839] text-base">
+                    <h3 className="font-bold text-slate-900 text-base">
                       {u.nombre}
                     </h3>
                     <span
@@ -220,10 +220,10 @@ export default function UsuariosPage() {
                       {esAdmin ? 'Administrador' : 'Vendedor / Operador'}
                     </span>
                   </div>
-                  <p className="text-xs text-[#4e6657] mt-1 font-mono">
+                  <p className="text-xs text-slate-600 mt-1 font-mono">
                     {u.email}
                   </p>
-                  <p className="text-[11px] text-[#89968d] mt-1">
+                  <p className="text-[11px] text-slate-400 mt-1">
                     Registrado: {formatearFecha(u.creadoEn)}
                   </p>
                 </div>
@@ -260,11 +260,11 @@ export default function UsuariosPage() {
       {/* MODAL: RESTABLECER CONTRASEÑA */}
       {modalReset && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white max-w-sm w-full rounded-2xl p-6 shadow-2xl border border-[#dfe4dc]">
-            <h3 className="font-serif text-xl font-bold text-[#20372d] mb-1">
+          <div className="bg-white max-w-sm w-full rounded-2xl p-6 shadow-2xl border border-slate-200">
+            <h3 className="font-serif text-xl font-bold text-slate-900 mb-1">
               Restablecer contraseña
             </h3>
-            <p className="text-xs text-[#657d6f] mb-4">
+            <p className="text-xs text-slate-500 mb-4">
               Usuario: <span className="font-bold">{modalReset.nombre}</span> ({modalReset.email})
             </p>
 
@@ -285,7 +285,7 @@ export default function UsuariosPage() {
                     type="button"
                     disabled={reseteando}
                     onClick={ejecutarReset}
-                    className="px-4 py-2 bg-[#254d3c] text-white text-xs font-bold rounded-lg cursor-pointer hover:bg-[#34634d] disabled:opacity-50"
+                    className="px-4 py-2 bg-[#d97736] text-white text-xs font-bold rounded-lg cursor-pointer hover:bg-[#c86928] disabled:opacity-50"
                   >
                     {reseteando ? 'Generando...' : 'Generar clave'}
                   </button>
@@ -305,7 +305,7 @@ export default function UsuariosPage() {
                 <button
                   type="button"
                   onClick={() => setModalReset(null)}
-                  className="w-full py-2 bg-[#1d3930] text-white text-xs font-bold rounded-lg cursor-pointer hover:bg-[#284f43]"
+                  className="w-full py-2 bg-[#2b333a] hover:bg-[#1f2429] text-white text-xs font-bold rounded-lg cursor-pointer"
                 >
                   Entendido, cerrar
                 </button>
@@ -320,11 +320,11 @@ export default function UsuariosPage() {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <form
             onSubmit={handleCrearUsuario}
-            className="bg-white max-w-md w-full rounded-2xl p-6 shadow-2xl border border-[#dfe4dc] space-y-4"
+            className="bg-white max-w-md w-full rounded-2xl p-6 shadow-2xl border border-slate-200 space-y-4"
           >
-            <div className="border-b border-[#edf0eb] pb-3">
-              <h3 className="font-serif text-2xl font-bold text-[#20372d]">Nuevo usuario</h3>
-              <p className="text-xs text-[#829087]">Creá un acceso para operar el comercio.</p>
+            <div className="border-b border-slate-100 pb-3">
+              <h3 className="font-serif text-2xl font-bold text-slate-900">Nuevo usuario</h3>
+              <p className="text-xs text-slate-400">Creá un acceso para operar el comercio.</p>
             </div>
 
             {errorModal && (
@@ -335,7 +335,7 @@ export default function UsuariosPage() {
 
             <div className="space-y-3">
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Nombre y apellido *
                 </label>
                 <input
@@ -344,12 +344,12 @@ export default function UsuariosPage() {
                   placeholder="Ej. Lucía Pérez"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Correo electrónico *
                 </label>
                 <input
@@ -358,12 +358,12 @@ export default function UsuariosPage() {
                   placeholder="lucia@comercio.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Contraseña inicial *
                 </label>
                 <input
@@ -372,18 +372,18 @@ export default function UsuariosPage() {
                   placeholder="Mínimo 6 caracteres"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#52675b] mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Rol / Perfil
                 </label>
                 <select
                   value={rol}
                   onChange={(e) => setRol(e.target.value as any)}
-                  className="w-full h-9 px-3 bg-[#fbfcf9] border border-[#dbe3da] rounded-lg text-sm"
+                  className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 >
                   <option value="vendedor">Vendedor / Operador (mostrador)</option>
                   <option value="admin">Administrador (acceso total)</option>
@@ -391,18 +391,18 @@ export default function UsuariosPage() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-3 border-t border-[#edf0eb]">
+            <div className="flex justify-end gap-3 pt-3 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => setModalNuevo(false)}
-                className="px-4 py-2 border border-[#d4ded4] bg-white text-[#355445] text-xs font-bold rounded-lg cursor-pointer"
+                className="px-4 py-2 border border-slate-200 bg-white text-slate-700 text-xs font-bold rounded-lg cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={guardando}
-                className="px-4 py-2 bg-[#254d3c] hover:bg-[#34634d] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
+                className="px-4 py-2 bg-[#d97736] hover:bg-[#c86928] text-white text-xs font-bold rounded-lg cursor-pointer disabled:opacity-50"
               >
                 {guardando ? 'Creando...' : 'Crear usuario'}
               </button>
