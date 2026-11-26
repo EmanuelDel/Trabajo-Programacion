@@ -19,14 +19,14 @@ interface Cliente {
 }
 
 interface MovimientoCuenta {
-  tipo: 'VENTA' | 'PAGO'
+  tipo: 'FACTURA' | 'PAGO'
+  id: number
+  comprobante: string
   fecha: string
-  facturaId?: number
-  pagoId?: number
-  numeroComprobante?: number
-  numeroRecibo?: number
-  importeCentavos: number
-  observacion?: string
+  debeCentavos: number
+  haberCentavos: number
+  saldoAcumuladoCentavos?: number
+  detalle?: string
 }
 
 export default function ClientesPage() {
@@ -87,8 +87,9 @@ export default function ClientesPage() {
         const data = await res.json()
         setMovimientosCuenta(data.movimientos || [])
         // Actualizar saldo con el más reciente
-        if (data.saldoCentavos !== undefined) {
-          setClienteCuenta({ ...cli, saldoCentavos: data.saldoCentavos })
+        const saldoActual = data.saldoActualCentavos ?? data.saldoCentavos
+        if (saldoActual !== undefined) {
+          setClienteCuenta({ ...cli, saldoCentavos: saldoActual })
         }
       }
     } finally {
@@ -367,29 +368,33 @@ export default function ClientesPage() {
                       </tr>
                     ) : (
                       movimientosCuenta.map((m, idx) => {
-                        const esVenta = m.tipo === 'VENTA'
+                        const esFactura = m.tipo === 'FACTURA'
+                        const importe = esFactura ? m.debeCentavos : m.haberCentavos
                         return (
-                          <tr key={idx} className="hover:bg-slate-50/70">
+                          <tr key={`${m.tipo}-${m.id}-${idx}`} className="hover:bg-slate-50/70">
                             <td className="py-3 px-4 font-mono text-slate-400">
                               {formatearFecha(m.fecha)}
                             </td>
                             <td className="py-3 px-4 font-semibold text-slate-900">
-                              {esVenta
-                                ? `Venta #${String(m.numeroComprobante || m.facturaId).padStart(5, '0')}`
-                                : `Pago Recibo #${String(m.numeroRecibo || m.pagoId).padStart(5, '0')} ${m.observacion ? `(${m.observacion})` : ''}`}
+                              <div>{m.comprobante}</div>
+                              {m.detalle && (
+                                <div className="text-[11px] font-normal text-slate-500 mt-0.5">
+                                  {m.detalle}
+                                </div>
+                              )}
                             </td>
                             <td className="py-3 px-3 text-center">
                               <span
                                 className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                                  esVenta ? 'bg-[#fff2d9] text-[#96661d]' : 'bg-[#def4e7] text-[#387e56]'
+                                  esFactura ? 'bg-[#fff2d9] text-[#96661d]' : 'bg-[#def4e7] text-[#387e56]'
                                 }`}
                               >
-                                {esVenta ? 'Débito' : 'Crédito'}
+                                {esFactura ? 'Débito' : 'Crédito'}
                               </span>
                             </td>
                             <td className="py-3 px-4 text-right font-mono font-bold">
-                              <span className={esVenta ? 'text-[#b85645]' : 'text-[#378253]'}>
-                                {esVenta ? `+ ${formatearCentavos(m.importeCentavos)}` : `− ${formatearCentavos(m.importeCentavos)}`}
+                              <span className={esFactura ? 'text-[#b85645]' : 'text-[#378253]'}>
+                                {esFactura ? `+ ${formatearCentavos(importe)}` : `− ${formatearCentavos(importe)}`}
                               </span>
                             </td>
                           </tr>
