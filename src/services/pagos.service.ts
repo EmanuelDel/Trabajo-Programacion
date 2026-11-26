@@ -1,5 +1,5 @@
 import { desc, eq, max } from 'drizzle-orm'
-import { db } from '../db'
+import { db, ejecutarTransaccion } from '../db'
 import { pagos, Pago } from '../db/schema'
 import { ApiError } from './api-error'
 import { calcularSaldoCliente, obtenerClientePorId } from './clientes.service'
@@ -37,7 +37,7 @@ export async function registrarPago(params: RegistrarPagoParams): Promise<{
     )
   }
 
-  return await db.transaction(async (tx) => {
+  return await ejecutarTransaccion(async (tx) => {
     // Obtener siguiente número de recibo de forma atómica
     const [maxRecibo] = await tx
       .select({ maximo: max(pagos.numeroRecibo) })

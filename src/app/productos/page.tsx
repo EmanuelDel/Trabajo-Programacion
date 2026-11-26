@@ -14,6 +14,7 @@ interface Producto {
   id: number
   codigo: string
   descripcion: string
+  marca?: string | null
   categoriaId: number
   categoria?: { id: number; nombre: string }
   precioVentaCentavos: number
@@ -52,6 +53,7 @@ export default function ProductosPage() {
   // Formulario Nuevo Producto
   const [prodCodigo, setProdCodigo] = useState('')
   const [prodDescripcion, setProdDescripcion] = useState('')
+  const [prodMarca, setProdMarca] = useState('')
   const [prodCategoriaId, setProdCategoriaId] = useState<number>(1)
   const [prodPrecioPesos, setProdPrecioPesos] = useState('')
   const [prodStockInicial, setProdStockInicial] = useState('0')
@@ -97,6 +99,7 @@ export default function ProductosPage() {
         body: JSON.stringify({
           codigo: prodCodigo,
           descripcion: prodDescripcion,
+          marca: prodMarca.trim() || undefined,
           categoriaId: prodCategoriaId || 1,
           precioVentaCentavos: pesosACentavos(prodPrecioPesos),
           existenciaInicial: parseInt(prodStockInicial, 10) || 0,
@@ -108,6 +111,7 @@ export default function ProductosPage() {
         setModalProducto(false)
         setProdCodigo('')
         setProdDescripcion('')
+        setProdMarca('')
         setProdPrecioPesos('')
         setProdStockInicial('0')
         setProdStockMinimo('5')
@@ -161,7 +165,8 @@ export default function ProductosPage() {
     if (!q) return true
     return (
       p.codigo.toLowerCase().includes(q) ||
-      p.descripcion.toLowerCase().includes(q)
+      p.descripcion.toLowerCase().includes(q) ||
+      (p.marca && p.marca.toLowerCase().includes(q))
     )
   })
 
@@ -244,7 +249,7 @@ export default function ProductosPage() {
           <div className="mb-6">
             <input
               type="text"
-              placeholder="Buscar por código o descripción..."
+              placeholder="Buscar por código, descripción o marca..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
               className="w-full sm:max-w-md h-11 px-4 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#d97736] shadow-sm"
@@ -260,13 +265,12 @@ export default function ProductosPage() {
               return (
                 <div
                   key={prod.id}
-                  className={`bg-white border border-slate-200 border-l-4 ${
-                    !prod.activo
-                      ? 'border-l-[#9aa69d] opacity-75'
-                      : bajoStock
+                  className={`bg-white border border-slate-200 border-l-4 ${!prod.activo
+                    ? 'border-l-[#9aa69d] opacity-75'
+                    : bajoStock
                       ? 'border-l-[#dfaa36]'
                       : 'border-l-[#e29a3c]'
-                  } rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:shadow transition-shadow`}
+                    } rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:shadow transition-shadow`}
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-[#fff1c9] text-[#946f13] grid place-items-center text-lg font-bold">
@@ -277,6 +281,7 @@ export default function ProductosPage() {
                         <h3 className="font-bold text-slate-900 text-base">
                           {prod.descripcion}
                         </h3>
+
                         {!prod.activo ? (
                           <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#edf0eb] text-slate-400">
                             Inactivo
@@ -292,7 +297,11 @@ export default function ProductosPage() {
                         )}
                       </div>
                       <p className="text-xs text-slate-600 mt-1">
-                        Código: <b className="font-mono">{prod.codigo}</b>
+                        Código: <b className="font-mono">{prod.codigo}</b>{prod.marca && (
+                          <span className="ml-2 px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-semibold text-[11px] border border-slate-200">
+                            {prod.marca}
+                          </span>
+                        )}
                       </p>
                       <div className="text-xs text-slate-500 mt-1">
                         Precio de venta: <b className="font-mono text-sm text-slate-900">{formatearCentavos(prod.precioVentaCentavos)}</b>
@@ -354,9 +363,8 @@ export default function ProductosPage() {
                       </td>
                       <td className="py-3 px-3 text-center">
                         <span
-                          className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                            esIngreso ? 'bg-[#def4e7] text-[#387e56]' : 'bg-[#fee2e2] text-[#991b1b]'
-                          }`}
+                          className={`px-2 py-0.5 rounded text-[10px] font-bold ${esIngreso ? 'bg-[#def4e7] text-[#387e56]' : 'bg-[#fee2e2] text-[#991b1b]'
+                            }`}
                         >
                           {m.tipo}
                         </span>
@@ -432,7 +440,16 @@ export default function ProductosPage() {
                   className="w-full h-9 px-3 bg-slate-50/50 border border-slate-200 rounded-lg text-sm"
                 />
               </div>
-
+              <div>
+                <label className="form-label">Marca (opcional)</label>
+                <input
+                  type="text"
+                  placeholder="Ej. La Virginia, Te Merengue, La Serenísima..."
+                  value={prodMarca}
+                  onChange={(e) => setProdMarca(e.target.value)}
+                  className="form-input"
+                />
+              </div>
               <div>
                 <label className="block text-xs font-bold text-slate-600 mb-1">Precio de venta ($) *</label>
                 <input

@@ -28,6 +28,7 @@ export const productos = sqliteTable('productos', {
   existencia: integer('existencia').notNull().default(0),
   stockMinimo: integer('stock_minimo').notNull().default(0),
   activo: integer('activo', { mode: 'boolean' }).notNull().default(true),
+  marca: text('marca'),
   creadoEn: text('creado_en').notNull()
 })
 

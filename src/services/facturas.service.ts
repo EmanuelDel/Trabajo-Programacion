@@ -1,5 +1,5 @@
 import { and, desc, eq, gte, lte, max } from 'drizzle-orm'
-import { db } from '../db'
+import { db, ejecutarTransaccion } from '../db'
 import { facturas, detallesFactura, Factura, DetalleFactura, productos } from '../db/schema'
 import { ApiError } from './api-error'
 import { moverStock } from './productos.service'
@@ -168,7 +168,7 @@ export async function crearFactura(params: CrearFacturaParams) {
   }
 
   // Transacción atómica de facturación + descarga de stock
-  return await db.transaction(async (tx) => {
+  return await ejecutarTransaccion(async (tx) => {
     // 1. Obtener siguiente número de factura correlativo
     const [maxNum] = await tx
       .select({ maximo: max(facturas.numero) })
@@ -224,7 +224,8 @@ export async function crearFactura(params: CrearFacturaParams) {
         `Venta en Factura #${String(siguienteNumero).padStart(8, '0')}`,
         'VENTA',
         params.usuarioId,
-        facturaInsertada.id
+        facturaInsertada.id,
+        tx
       )
     }
 
@@ -260,7 +261,7 @@ export async function anularFactura(
     throw new ApiError(400, 'FACTURA_YA_ANULADA', 'La factura ya se encuentra anulada')
   }
 
-  return await db.transaction(async (tx) => {
+  return await ejecutarTransaccion(async (tx) => {
     const ahora = new Date().toISOString()
 
     // 1. Marcar factura como ANULADA
@@ -284,7 +285,8 @@ export async function anularFactura(
         `Anulación Factura #${String(factura.numero).padStart(8, '0')}: ${motivoLimpio}`,
         'ANULACION',
         usuarioId,
-        factura.id
+        factura.id,
+        tx
       )
     }
 

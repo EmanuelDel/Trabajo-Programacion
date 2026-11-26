@@ -1,5 +1,5 @@
 import { and, eq, lte, or, sql, like } from 'drizzle-orm'
-import { db } from '../db'
+import { db, ejecutarTransaccion } from '../db'
 import { productos, movimientosStock, Producto, NuevoProducto, MovimientoStock } from '../db/schema'
 import { ApiError } from './api-error'
 
@@ -71,6 +71,7 @@ export async function obtenerProductoPorCodigo(codigo: string) {
 export async function crearProducto(datos: {
   codigo: string
   descripcion: string
+  marca?: string | null
   categoriaId: number
   precioVentaCentavos: number
   existenciaInicial?: number
@@ -97,12 +98,13 @@ export async function crearProducto(datos: {
     throw new ApiError(400, 'CODIGO_DUPLICADO', `Ya existe un producto con el código ${codigoLimpio}`)
   }
 
-  const nuevo = await db.transaction(async (tx) => {
+  const nuevo = await ejecutarTransaccion(async (tx) => {
     const [prod] = await tx
       .insert(productos)
       .values({
         codigo: codigoLimpio,
         descripcion: descripcionLimpia,
+        marca: datos.marca ? datos.marca.trim() : null,
         categoriaId: datos.categoriaId,
         precioVentaCentavos: datos.precioVentaCentavos,
         existencia: existenciaInicial,
@@ -209,65 +211,72 @@ export async function moverStock(
   motivo: string,
   origen: 'INICIAL' | 'MANUAL' | 'VENTA' | 'ANULACION',
   usuarioId: number,
-  facturaId?: number
+  facturaId?: number,
+  tx?: any
 ): Promise<MovimientoStock> {
   if (cantidad <= 0) {
     throw new ApiError(400, 'CANTIDAD_INVALIDA', 'La cantidad del movimiento debe ser mayor a cero')
   }
 
   const delta = tipo === 'INGRESO' ? cantidad : -cantidad
+  const ejecutar = async (clienteTx: any) => {
 
-  return await db.transaction(async (tx) => {
-    // Obtenemos producto para control de concurrencia y validación de existencia
-    const [prod] = await tx
-      .select()
-      .from(productos)
-      .where(eq(productos.id, productoId))
-      .limit(1)
+    return await db.transaction(async (tx) => {
+      // Obtenemos producto para control de concurrencia y validación de existencia
+      const [prod] = await tx
+        .select()
+        .from(productos)
+        .where(eq(productos.id, productoId))
+        .limit(1)
 
-    if (!prod) {
-      throw new ApiError(404, 'PRODUCTO_NO_ENCONTRADO', 'Producto no encontrado')
-    }
+      if (!prod) {
+        throw new ApiError(404, 'PRODUCTO_NO_ENCONTRADO', 'Producto no encontrado')
+      }
 
-    const nuevaExistencia = prod.existencia + delta
+      const nuevaExistencia = prod.existencia + delta
 
-    if (nuevaExistencia < 0) {
-      throw new ApiError(
-        400,
-        'STOCK_INSUFICIENTE',
-        `Stock insuficiente para "${prod.descripcion}". Disponible: ${prod.existencia}, requerido: ${cantidad}`,
-        {
+      if (nuevaExistencia < 0) {
+        throw new ApiError(
+          400,
+          'STOCK_INSUFICIENTE',
+          `Stock insuficiente para "${prod.descripcion}". Disponible: ${prod.existencia}, requerido: ${cantidad}`,
+          {
+            productoId,
+            codigo: prod.codigo,
+            descripcion: prod.descripcion,
+            existenciaActual: prod.existencia,
+            cantidadRequerida: cantidad
+          }
+        )
+      }
+
+      // Actualizamos existencia
+      await tx
+        .update(productos)
+        .set({ existencia: nuevaExistencia })
+        .where(eq(productos.id, productoId))
+
+      // Registramos movimiento inmutable
+      const [mov] = await tx
+        .insert(movimientosStock)
+        .values({
+          fecha: new Date().toISOString(),
           productoId,
-          codigo: prod.codigo,
-          descripcion: prod.descripcion,
-          existenciaActual: prod.existencia,
-          cantidadRequerida: cantidad
-        }
-      )
-    }
+          tipo,
+          cantidad,
+          existenciaResultante: nuevaExistencia,
+          motivo,
+          origen,
+          usuarioId,
+          facturaId: facturaId ?? null
+        })
+        .returning()
 
-    // Actualizamos existencia
-    await tx
-      .update(productos)
-      .set({ existencia: nuevaExistencia })
-      .where(eq(productos.id, productoId))
+      return mov
+    })
+  }
 
-    // Registramos movimiento inmutable
-    const [mov] = await tx
-      .insert(movimientosStock)
-      .values({
-        fecha: new Date().toISOString(),
-        productoId,
-        tipo,
-        cantidad,
-        existenciaResultante: nuevaExistencia,
-        motivo,
-        origen,
-        usuarioId,
-        facturaId: facturaId ?? null
-      })
-      .returning()
-
-    return mov
+  return await ejecutarTransaccion(async (innerTx) => {
+    return await ejecutar(innerTx)
   })
 }

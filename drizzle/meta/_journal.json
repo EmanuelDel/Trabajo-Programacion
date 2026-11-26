@@ -8,6 +8,13 @@
       "when": 1795017253254,
       "tag": "0000_wide_rage",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1795665200431,
+      "tag": "0001_fair_scalphunter",
+      "breakpoints": true
     }
   ]
 }

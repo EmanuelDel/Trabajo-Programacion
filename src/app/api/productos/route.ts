@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
     const nuevo = await crearProducto({
       codigo: body.codigo,
       descripcion: body.descripcion,
+      marca: body.marca,
       categoriaId: parseInt(body.categoriaId, 10),
       precioVentaCentavos: parseInt(body.precioVentaCentavos, 10),
       existenciaInicial: body.existenciaInicial !== undefined ? parseInt(body.existenciaInicial, 10) : 0,
